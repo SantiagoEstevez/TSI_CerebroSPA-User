@@ -1,0 +1,61 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Agregar ciudad</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <input id="mapsearch" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="map" style="margin-top: 0px; height:300px;">
+                                </div>
+                                <!--<maps-cmp></maps-cmp>-->
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-danger pull-left" (click)="agregarCiudad()">Agregar ciudad</button>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Lista de ciudades-->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Mis ciudades</h4>
+                        <!--<p class="category">lista de </p>-->
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-danger">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>latitud</th>
+                                    <th>longitud</th>
+                                    <th>Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let ciudad of ciudades">
+                                    <td>{{ciudad.Nombre}}</td>
+                                    <td>{{ciudad.Latitud}}</td>
+                                    <td>{{ciudad.Longitud}}</td>
+                                    <td (click)="eliminarCiudad(ciudad)"><i class="material-icons link">delete</i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,94 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-11">
+                <div class="card" style="z-index:1;">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Agregar tipo sensor</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle dropdown-Width" type="button" data-toggle="dropdown">
+                                            <span>{{CampoCiudad}}</span>
+                                            <span class="caret">  </span>
+                                        </button>
+                                        <ul class="dropdown-menu" style="z-index: 1;">
+                                            <li *ngFor="let ciudad of ciudades">
+                                                <a (click)="changeCiudad(ciudad)" style="cursor: pointer;">{{ciudad.Nombre}}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle dropdown-Width" type="button" data-toggle="dropdown">
+                                            <span>{{CampoTS}}</span>
+                                            <span class="caret">  </span>
+                                        </button>
+                                        <ul class="dropdown-menu" style="z-index: 1;">
+                                            <li *ngFor="let tipoBaseSensor of tipoBaseSensores">
+                                                <a (click)="changeTipoBase(tipoBaseSensor)" style="cursor: pointer;">{{tipoBaseSensor.nombre}}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label class="control-label">Nombre</label>
+                                    <input [(ngModel)]="nuevoTipoSensor.nombre" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label class="control-label">Frecuencia lectura /s</label>
+                                    <input [(ngModel)]="nuevoTipoSensor.frecuencia" type="number" class="form-control" min="3" max="10">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-danger pull-left" (click)="agregarTipoSensor()"> Agregar sensor</button>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Lista de tipo de sensores-->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Mis tipos de sensores</h4>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-danger">
+                                <tr>
+                                    <th>Ciudad</th>
+                                    <th>Tipo sensor</th>
+                                    <th>Nombre sensor</th>
+                                    <th>Lectura datos en s</th>
+                                    <th>Editar</th>
+                                    <th>Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let tipoSensor of tipoSensores">
+                                    <td>{{tipoSensor.ciudad}}</td>
+                                    <td>{{tipoSensor.tipo}}</td>
+                                    <td>{{tipoSensor.nombre}}</td>
+                                    <td>{{tipoSensor.frecuencia}}</td>
+                                    <td (click)="editarTipoSensor(tipoSensor)"><i class="material-icons link">mode_edit</i></td>
+                                    <td (click)="eliminarTipoSensor(tipoSensor)"><i class="material-icons link">delete</i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Agregar zonas</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle dropdown-Width" type="button" data-toggle="dropdown">
+                                            <span>{{CampoCiudad}}</span>
+                                            <span class="caret">  </span>
+                                        </button>
+                                        <ul class="dropdown-menu" style="z-index: 1;">
+                                            <li *ngFor="let ciudad of ciudades">
+                                                <a (click)="changeCiudad(ciudad)" style="cursor: pointer;">{{ciudad.Nombre}}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="">
+                            <div class="col-md-12">
+                                <div id="map" style="margin-top: 0px; height:300px;">
+                                </div>
+                                <!--<maps-cmp></maps-cmp>-->
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-danger pull-left" (click)="agregarZona()">Agregar zona</button>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Lista de sensores-->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Mis zonas</h4>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-danger">
+                                <tr>
+                                    <th>Ciudad</th>
+                                    <th>Tamaño</th>
+                                    <th>latitud</th>
+                                    <th>longitud</th>
+                                    <th>Editar</th>
+                                    <th>Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let zona of zonas">
+                                    <td>{{zona.ciudad}}</td>
+                                    <td>{{zona.Radio}}</td>
+                                    <td>{{zona.Latitude}}</td>
+                                    <td>{{zona.Longitude}}</td>
+                                    <td (click)="editarZona(zona)"><i class="material-icons link">mode_edit</i></td>
+                                    <td (click)="eliminarZona(zona)"><i class="material-icons link">delete</i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,140 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Agregar evento</h4>
+                    </div>
+                    <div class="card-content table-responsive" style="z-index: 0;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle dropdown-Width" type="button" data-toggle="dropdown">
+                                            <span>{{CampoCiudad}}</span>
+                                            <span class="caret">  </span>
+                                        </button>
+                                        <ul class="dropdown-menu" style="z-index: 1;">
+                                            <li *ngFor="let ciudad of ciudades">
+                                                <a (click)="changeCiudad(ciudad)" style="cursor: pointer;">{{ciudad.Nombre}}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label class="control-label">Nombre</label>
+                                    <input [(ngModel)]="oEvento.Nombre" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-md-12" style="z-index: 1;">
+                                <div class="card">
+                                    <div class="card-header" data-background-color="red" style="height: 40px; background: #1b1983;">
+                                        Condiciones
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="form-group form-black label-floating is-empty">
+                                                    <div class="dropdown" style="z-index: 1;">
+                                                        <button class="btn btn-primary dropdown-toggle dropdown-Width" type="button" data-toggle="dropdown">
+                                                            <span>{{CampoTS}}</span>
+                                                            <span class="caret">  </span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" style="z-index: 1;">
+                                                            <li *ngFor="let tipoSensor of tipoSensores">
+                                                                <a (click)="changeTipoSensor(tipoSensor)" style="cursor: pointer;">{{tipoSensor.nombre}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group form-black label-floating is-empty">
+                                                    <div class="dropdown" style="z-index: 1;">
+                                                        <button class="btn btn-primary dropdown-toggle dropdown-Width" type="button" data-toggle="dropdown">
+                                                            <span>{{CampoRegla}}</span>
+                                                            <span class="caret">  </span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" style="z-index: 1;">
+                                                            <li *ngFor="let regla of reglas">
+                                                                <a (click)="changeRegla(regla)" style="cursor: pointer;">{{regla}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group form-black label-floating is-empty">
+                                                    <label class="control-label">Medida</label>
+                                                    <input [(ngModel)]="oDispositivo.Medida" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group form-black label-floating is-empty">
+                                                    <button type="button" class="btn btn-danger pull-left" (click)="agregarDispositivo()" style="background: #1b1983;"> Agregar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Tipo de sensor</th>
+                                                    <th>Regla</th>
+                                                    <th>Medida</th>
+                                                    <th>Eliminar</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let dispositivo of dispositivos">
+                                                    <td>{{dispositivo.Tipo}}</td>
+                                                    <td>{{dispositivo.Regla}}</td>
+                                                    <td>{{dispositivo.Medida}}</td>
+                                                    <td (click)="eliminarDispositivo(dispositivo)"><i class="material-icons link">delete</i></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-danger pull-left" (click)="agregarEvento()"> Agregar evento</button>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Mis eventos</h4>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Cantidad sensores asociados.</th>
+                                    <th>Editar</th>
+                                    <th>Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let evento of eventos">
+                                    <td>{{evento.Nombre}}</td>
+                                    <td>{{evento.SendoresAsociados.length}}</td>
+                                    <td (click)="editarEvento(evento)"><i class="material-icons link">mode_edit</i></td>
+                                    <td (click)="eliminarEvento(evento)"><i class="material-icons link">delete</i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

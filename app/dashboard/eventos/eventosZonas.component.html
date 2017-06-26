@@ -1,0 +1,43 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Zonas disponibles</h4>
+                        <!--<p class="category">Here is a subtitle for this table</p>-->
+                    </div>
+                    <div class="card-content table-responsive">
+                        <div id="map" style="margin-top: 0px; height:500px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Eventos disponibles.</h4>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Cantidad sensores asociados.</th>
+                                    <th>Suscribirse</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let evento of eventos">
+                                    <td>{{evento.Nombre}}</td>
+                                    <td>{{evento.SendoresAsociados.length}}</td>
+                                    <td (click)="suscribirseEvento(evento)"><i class="material-icons link">favorite</i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

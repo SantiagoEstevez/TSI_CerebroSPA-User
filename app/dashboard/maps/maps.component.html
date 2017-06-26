@@ -1,0 +1,17 @@
+<div class="row" style="margin-top: 70px;">
+    <div class="form-group form-black label-floating is-empty">
+        <div class="dropdown" style="width:400px;">
+            <button class="btn btn-primary dropdown-toggle dropdown-Width" type="button" data-toggle="dropdown">
+                <span>{{CampoCiudad}}</span>
+                <span class="caret">  </span>
+            </button>
+            <ul class="dropdown-menu" style="z-index: 1;">
+                <li *ngFor="let ciudad of ciudades">
+                    <a (click)="changeCiudad(ciudad)" style="cursor: pointer;">{{ciudad.Nombre}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="map" style="margin-top: 0px;">
+</div>
