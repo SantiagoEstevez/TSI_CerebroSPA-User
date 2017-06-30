@@ -33,7 +33,7 @@ export const MODULE_ROUTES: Route[] =[
     //{ path: 'icons', component: IconsComponent },
     //{ path: 'typography', component: TypographyComponent },
     //{ path: 'upgrade', component: UpgradeComponent },
-    { path: '', redirectTo: 'maps', pathMatch: 'full' }
+    { path: '', redirectTo: 'notifications', pathMatch: 'full' }
     //{ path: '', redirectTo: 'login', pathMatch: 'full' }
 ]
 

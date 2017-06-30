@@ -30,7 +30,7 @@ exports.MODULE_ROUTES = [
     //{ path: 'icons', component: IconsComponent },
     //{ path: 'typography', component: TypographyComponent },
     //{ path: 'upgrade', component: UpgradeComponent },
-    { path: '', redirectTo: 'maps', pathMatch: 'full' }
+    { path: '', redirectTo: 'notifications', pathMatch: 'full' }
 ];
 exports.MODULE_COMPONENTS = [
     login_component_1.LoginComponent,

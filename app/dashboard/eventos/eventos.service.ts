@@ -14,16 +14,16 @@ export class EventosService {
 
     constructor(private http: Http) { }
 
-    getEventos(lat: number, lon: number): Promise<Evento[]> {
-        const url = `${this.url}cityLat/${lat}/cityLon/${lon}/`;
-        return this.http.get(url)
+    getEventos(): Promise<Evento[]> {
+        //const url = `${this.url}cityLat/${lat}/cityLon/${lon}/`;
+        return this.http.get(this.url)
             .toPromise()
-            .then(response => response.json() as Evento[])
+            .then(response => response.json().data as Evento[])
             .catch(this.handleError);
     }
 
-    getEventosZona(id: number): Promise<Evento[]> {
-        const url = `${this.urlZona}cityLat/${id}/`;
+    getEventosZona(idZona: number): Promise<Evento[]> {
+        const url = `${this.urlZona}cityLat/${idZona}/`;
         return this.http.get(this.url)
             .toPromise()
             .then(response => response.json().data as Evento[])
@@ -47,7 +47,6 @@ export class EventosService {
     //}
 
     setEvento(nurevoEvento: Evento): Promise<Evento> {
-        console.log(JSON.stringify(nurevoEvento));
         return this.http
             .post(this.url, JSON.stringify(nurevoEvento), { headers: this.headers })
             .toPromise()

@@ -102,7 +102,7 @@ export class CiudadesComponent implements OnInit {
         var cantZonas: number = 0;
 
         this.sensoresService.getSensores(ciudad.Latitud, ciudad.Longitud).subscribe(s => cantSensores = s.length);
-        this.zonasService.getZonas(ciudad.Latitud, ciudad.Longitud).then(z => cantZonas = z.length);
+        //this.zonasService.getZonas(ciudad.Latitud, ciudad.Longitud).then(z => cantZonas = z.length);
 
         if (cantSensores > 0 || cantZonas > 0) {
             alert("No se puede borrar la ciudad ya que hay zonas y/o sensores asociada a ella");

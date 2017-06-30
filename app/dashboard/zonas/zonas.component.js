@@ -147,19 +147,8 @@ var ZonasComponent = (function () {
         });
     };
     ZonasComponent.prototype.getZonas = function () {
-        var _this = this;
-        var _loop_1 = function() {
-            var nombre = this_1.ciudades[i].Nombre;
-            this_1.zonasService.getZonas(this_1.ciudades[i].Latitud, this_1.ciudades[i].Longitud).then(function (z) {
-                for (var s = 0; s < z.length; s++) {
-                    z[s].ciudad = nombre;
-                    _this.zonas.push(z[s]);
-                }
-            });
-        };
-        var this_1 = this;
         for (var i = 0; i < this.ciudades.length; i++) {
-            _loop_1();
+            var nombre = this.ciudades[i].Nombre;
         }
     };
     ZonasComponent.prototype.setZona = function (nueva) {

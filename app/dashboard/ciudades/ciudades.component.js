@@ -83,7 +83,7 @@ var CiudadesComponent = (function () {
         var cantSensores = 0;
         var cantZonas = 0;
         this.sensoresService.getSensores(ciudad.Latitud, ciudad.Longitud).subscribe(function (s) { return cantSensores = s.length; });
-        this.zonasService.getZonas(ciudad.Latitud, ciudad.Longitud).then(function (z) { return cantZonas = z.length; });
+        //this.zonasService.getZonas(ciudad.Latitud, ciudad.Longitud).then(z => cantZonas = z.length);
         if (cantSensores > 0 || cantZonas > 0) {
             alert("No se puede borrar la ciudad ya que hay zonas y/o sensores asociada a ella");
         }

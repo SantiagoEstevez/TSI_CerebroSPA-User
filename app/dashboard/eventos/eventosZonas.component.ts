@@ -2,15 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 //Clases
 import { Evento } from './evento';
-import { Dispositivo } from './dispositivo';
-import { TipoBaseSensor } from '../tipo-sensores/tipo-base-sensor';
-import { Ciudad } from '../ciudades/ciudad'
 import { Zona } from '../zonas/zona'
 
 //Servicios.
 import { EventosService } from './eventos.service';
-import { TipoSensoresService } from '../tipo-sensores/tipo-sensor.service';
-import { CiudadesService } from '../ciudades/ciudades.service'
 import { ZonasService } from '../zonas/zonas.service'
 
 declare var google: any;
@@ -25,8 +20,6 @@ export class EventosZonasComponent implements OnInit {
 
     constructor(
         private eventosService: EventosService,
-        private tipoSensoresService: TipoSensoresService,
-        private CiudadesService: CiudadesService,
         private ZonasService: ZonasService
     ) { };
     
@@ -45,7 +38,7 @@ export class EventosZonasComponent implements OnInit {
         var mapOptions = {
             zoom: 13,
             center: myLatlng,
-            scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
+            scrollwheel: true, //we disable de scroll over the map, it is a really annoing when you scroll through page
             styles: []
         }
         this.map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -65,7 +58,7 @@ export class EventosZonasComponent implements OnInit {
 
     //---> Funciones de eventos <---
     suscribirseEvento(evento: Evento) {
-        alert("suscribiendo a evento");
+        this.setSuscripcionEvento(evento);
     }
 
     //---> Funciones de servicios <---
@@ -82,13 +75,13 @@ export class EventosZonasComponent implements OnInit {
                         }
                         this.eventos.push(eventos[e]);
                     }
-                    console.log(this.eventos);
                 }
             });
         } 
     }
 
     setSuscripcionEvento(nuevo: Evento): void {
+        alert("suscribiendo a evento 2.0");
         //this.eventosService.setEventoZona(nuevo).then(() => {
         //    this.inicializo();
         //});

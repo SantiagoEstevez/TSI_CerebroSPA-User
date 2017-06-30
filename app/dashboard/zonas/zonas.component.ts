@@ -181,12 +181,12 @@ export class ZonasComponent implements OnInit {
         for (var i = 0; i < this.ciudades.length; i++) {
             let nombre = this.ciudades[i].Nombre;
 
-            this.zonasService.getZonas(this.ciudades[i].Latitud, this.ciudades[i].Longitud).then(z => {
-                for (var s = 0; s < z.length; s++) {
-                    z[s].ciudad = nombre;
-                    this.zonas.push(z[s]);
-                }
-            });
+            //this.zonasService.getZonas(this.ciudades[i].Latitud, this.ciudades[i].Longitud).then(z => {
+            //    for (var s = 0; s < z.length; s++) {
+            //        z[s].ciudad = nombre;
+            //        this.zonas.push(z[s]);
+            //    }
+            //});
         }
     }
 

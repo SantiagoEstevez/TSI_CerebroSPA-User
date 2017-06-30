@@ -11,14 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 //Servicios.
 var eventos_service_1 = require('./eventos.service');
-var tipo_sensor_service_1 = require('../tipo-sensores/tipo-sensor.service');
-var ciudades_service_1 = require('../ciudades/ciudades.service');
 var zonas_service_1 = require('../zonas/zonas.service');
 var EventosZonasComponent = (function () {
-    function EventosZonasComponent(eventosService, tipoSensoresService, CiudadesService, ZonasService) {
+    function EventosZonasComponent(eventosService, ZonasService) {
         this.eventosService = eventosService;
-        this.tipoSensoresService = tipoSensoresService;
-        this.CiudadesService = CiudadesService;
         this.ZonasService = ZonasService;
     }
     ;
@@ -28,7 +24,7 @@ var EventosZonasComponent = (function () {
         var mapOptions = {
             zoom: 13,
             center: myLatlng,
-            scrollwheel: false,
+            scrollwheel: true,
             styles: []
         };
         this.map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -43,7 +39,7 @@ var EventosZonasComponent = (function () {
     };
     //---> Funciones de eventos <---
     EventosZonasComponent.prototype.suscribirseEvento = function (evento) {
-        alert("suscribiendo a evento");
+        this.setSuscripcionEvento(evento);
     };
     //---> Funciones de servicios <---
     EventosZonasComponent.prototype.getEventos = function (lat, lon) {
@@ -59,12 +55,12 @@ var EventosZonasComponent = (function () {
                         }
                         _this.eventos.push(eventos[e]);
                     }
-                    console.log(_this.eventos);
                 }
             });
         }
     };
     EventosZonasComponent.prototype.setSuscripcionEvento = function (nuevo) {
+        alert("suscribiendo a evento 2.0");
         //this.eventosService.setEventoZona(nuevo).then(() => {
         //    this.inicializo();
         //});
@@ -109,7 +105,7 @@ var EventosZonasComponent = (function () {
             moduleId: module.id,
             templateUrl: 'eventosZonas.component.html'
         }), 
-        __metadata('design:paramtypes', [eventos_service_1.EventosService, tipo_sensor_service_1.TipoSensoresService, ciudades_service_1.CiudadesService, zonas_service_1.ZonasService])
+        __metadata('design:paramtypes', [eventos_service_1.EventosService, zonas_service_1.ZonasService])
     ], EventosZonasComponent);
     return EventosZonasComponent;
 }());

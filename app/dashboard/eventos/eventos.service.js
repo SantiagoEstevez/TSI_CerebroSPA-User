@@ -19,15 +19,15 @@ var EventosService = (function () {
         //private url = 'http://localhost:6346/api/Evento/Global/';
         this.urlZona = 'http://localhost:6346/api/Evento/Zone/';
     }
-    EventosService.prototype.getEventos = function (lat, lon) {
-        var url = this.url + "cityLat/" + lat + "/cityLon/" + lon + "/";
-        return this.http.get(url)
+    EventosService.prototype.getEventos = function () {
+        //const url = `${this.url}cityLat/${lat}/cityLon/${lon}/`;
+        return this.http.get(this.url)
             .toPromise()
-            .then(function (response) { return response.json(); })
+            .then(function (response) { return response.json().data; })
             .catch(this.handleError);
     };
-    EventosService.prototype.getEventosZona = function (id) {
-        var url = this.urlZona + "cityLat/" + id + "/";
+    EventosService.prototype.getEventosZona = function (idZona) {
+        var url = this.urlZona + "cityLat/" + idZona + "/";
         return this.http.get(this.url)
             .toPromise()
             .then(function (response) { return response.json().data; })
@@ -48,7 +48,6 @@ var EventosService = (function () {
     //        .catch(this.handleError);
     //}
     EventosService.prototype.setEvento = function (nurevoEvento) {
-        console.log(JSON.stringify(nurevoEvento));
         return this.http
             .post(this.url, JSON.stringify(nurevoEvento), { headers: this.headers })
             .toPromise()
