@@ -11,8 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var sidebar_routes_config_1 = require('../.././sidebar/sidebar-routes.config');
 var common_1 = require('@angular/common');
+var authentication_service_1 = require('../../dashboard/authentication.service');
 var NavbarComponent = (function () {
-    function NavbarComponent(location) {
+    function NavbarComponent(location, authenticationService) {
+        this.authenticationService = authenticationService;
         this.location = location;
     }
     NavbarComponent.prototype.ngOnInit = function () {
@@ -42,7 +44,7 @@ var NavbarComponent = (function () {
             selector: 'navbar-cmp',
             templateUrl: 'navbar.component.html'
         }), 
-        __metadata('design:paramtypes', [common_1.Location])
+        __metadata('design:paramtypes', [common_1.Location, authentication_service_1.AuthenticationService])
     ], NavbarComponent);
     return NavbarComponent;
 }());
