@@ -17,19 +17,19 @@ import { ZonasComponent } from './zonas/zonas.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 
-export const MODULE_ROUTES: Route[] =[
+export const MODULE_ROUTES: Route[] = [
+    { path: 'login', component: LoginComponent },
     //{ path: 'dashboard', component: HomeComponent },
     //{ path: 'maps', component: MapsComponent },
     //{ path: 'Ciudades', component: CiudadesComponent },
     //{ path: 'TipoSensores', component: TipoSensoresComponent },
     //{ path: 'Sensores', component: SensoresComponent },
     //{ path: 'Zonas', component: ZonasComponent },
-    { path: 'Eventos', component: EventosComponent },
-    { path: 'EventosZonas', component: EventosZonasComponent },
-    { path: 'notifications', component: NotificationsComponent },
-    { path: 'login', component: LoginComponent },
+    { path: 'Eventos', component: EventosComponent, canActivate: [AuthGuard] },
+    { path: 'EventosZonas', component: EventosZonasComponent, canActivate: [AuthGuard] },
+    { path: 'notifications', component: NotificationsComponent, canActivate: [AuthGuard] },
     //{ path: 'user', component: UserComponent },
-    { path: 'table', component: TableComponent },
+    { path: 'table', component: TableComponent, canActivate: [AuthGuard] },
     //{ path: 'icons', component: IconsComponent },
     //{ path: 'typography', component: TypographyComponent },
     //{ path: 'upgrade', component: UpgradeComponent },

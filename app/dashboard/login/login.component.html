@@ -1,4 +1,49 @@
-<div class="col-md-6 col-md-offset-3">
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Login</h4>
+                    </div>
+                    <div class="card-content table-responsive" style="z-index: 0;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label class="control-label">Nombre usuario</label>
+                                    <input [(ngModel)]="user" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label class="control-label">Password</label>
+                                    <input [(ngModel)]="password" type="password" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-danger pull-left" (click)="login()">
+                            Login
+                        </button>
+                        <a class="btn btn-social btn-facebook pull-right" (click)="onFacebookLoginClick()">
+                            <span class="fa fa-facebook"></span> Sign in with Facebook
+                        </a>
+                        <!--<button class="btn btn-facebook pull-left" (click)="onFacebookLoginClick()">
+                            <i class="fa fa-facebook fa-fw"></i>Sign in with Facebook
+                        </button>-->
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<div class="col-md-6 col-md-offset-3">
     <div class="alert alert-info">
         Username: test<br />
         Password: test
@@ -42,5 +87,3 @@
             (click)="auth.logout()">
         Log Out
     </button>-->
-
-</div>

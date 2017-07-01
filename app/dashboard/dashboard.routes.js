@@ -14,19 +14,20 @@ var tipo_sensores_component_1 = require('./tipo-sensores/tipo-sensores.component
 var sensores_component_1 = require('./sensores/sensores.component');
 var zonas_component_1 = require('./zonas/zonas.component');
 var login_component_1 = require('./login/login.component');
+var auth_guard_1 = require('./auth.guard');
 exports.MODULE_ROUTES = [
+    { path: 'login', component: login_component_1.LoginComponent },
     //{ path: 'dashboard', component: HomeComponent },
     //{ path: 'maps', component: MapsComponent },
     //{ path: 'Ciudades', component: CiudadesComponent },
     //{ path: 'TipoSensores', component: TipoSensoresComponent },
     //{ path: 'Sensores', component: SensoresComponent },
     //{ path: 'Zonas', component: ZonasComponent },
-    { path: 'Eventos', component: eventos_component_1.EventosComponent },
-    { path: 'EventosZonas', component: eventosZonas_component_1.EventosZonasComponent },
-    { path: 'notifications', component: notifications_component_1.NotificationsComponent },
-    { path: 'login', component: login_component_1.LoginComponent },
+    { path: 'Eventos', component: eventos_component_1.EventosComponent, canActivate: [auth_guard_1.AuthGuard] },
+    { path: 'EventosZonas', component: eventosZonas_component_1.EventosZonasComponent, canActivate: [auth_guard_1.AuthGuard] },
+    { path: 'notifications', component: notifications_component_1.NotificationsComponent, canActivate: [auth_guard_1.AuthGuard] },
     //{ path: 'user', component: UserComponent },
-    { path: 'table', component: table_component_1.TableComponent },
+    { path: 'table', component: table_component_1.TableComponent, canActivate: [auth_guard_1.AuthGuard] },
     //{ path: 'icons', component: IconsComponent },
     //{ path: 'typography', component: TypographyComponent },
     //{ path: 'upgrade', component: UpgradeComponent },

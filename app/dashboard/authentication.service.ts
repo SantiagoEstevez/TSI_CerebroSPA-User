@@ -64,6 +64,14 @@ export class AuthenticationService {
         localStorage.removeItem('token');
     }
 
+    getLoginStatus(): boolean {
+        if (localStorage.getItem('token')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);

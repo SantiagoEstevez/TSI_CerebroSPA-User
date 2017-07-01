@@ -30,6 +30,12 @@ var NavbarComponent = (function () {
         }
         return 'Dashboard';
     };
+    NavbarComponent.prototype.logout = function () {
+        this.authenticationService.logout();
+    };
+    NavbarComponent.prototype.LoginStatus = function () {
+        return this.authenticationService.getLoginStatus();
+    };
     NavbarComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

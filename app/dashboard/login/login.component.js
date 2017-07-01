@@ -16,38 +16,59 @@ var LoginComponent = (function () {
     function LoginComponent(router, authenticationService) {
         this.router = router;
         this.authenticationService = authenticationService;
-        this.model = {};
         this.loading = false;
         this.error = '';
+        FB.init({
+            appId: '1465232330164930',
+            cookie: false,
+            // the session
+            xfbml: true,
+            version: 'v2.8' // use graph api version 2.5
+        });
     }
     LoginComponent.prototype.ngOnInit = function () {
+        var _this = this;
         // reset login status
         this.authenticationService.logout();
+        FB.getLoginStatus(function (response) {
+            _this.statusChangeCallback(response);
+        });
     };
+    //---> Funciones internas <---
+    LoginComponent.prototype.statusChangeCallback = function (resp) {
+        console.log(resp);
+        if (resp.status === 'connected') {
+        }
+        else if (resp.status === 'not_authorized') {
+        }
+        else {
+        }
+    };
+    ;
+    //---> Funciones de eventos <---
     LoginComponent.prototype.login = function () {
+        var _this = this;
         var usuario = new usuario_1.Usuario();
         usuario.CI = "477";
         usuario.Name = "santiago";
         usuario.Lastname = "estevez";
-        usuario.Username = this.model.username;
-        usuario.Password = this.model.password;
+        usuario.Username = this.user;
+        usuario.Password = this.password;
         this.loading = true;
-        //this.authenticationService.login(usuario)
-        //    .subscribe(result => {
-        //        console.log("despues");
-        //        if (result == true) {
-        //            // login successful
-        //            this.router.navigate(['/']);
-        //        } else {
-        //            // login failed
-        //            this.error = 'Username or password is incorrect';
-        //            this.loading = false;
-        //        }
-        //    });
         this.authenticationService.login(usuario).subscribe(function (result) {
-            console.log(result);
-            console.log(localStorage.getItem('token'));
+            if (result == true) {
+                // login successful
+                _this.router.navigate(['/']);
+            }
+            else {
+                // login failed
+                _this.error = 'Username or password is incorrect';
+                _this.loading = false;
+            }
         });
+    };
+    LoginComponent.prototype.onFacebookLoginClick = function () {
+        FB.login();
     };
     LoginComponent = __decorate([
         core_1.Component({

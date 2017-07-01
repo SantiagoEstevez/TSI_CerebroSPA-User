@@ -1,6 +1,7 @@
 import {  RouteInfo } from './sidebar.metadata';
 
 export const ROUTES: RouteInfo[] = [
+    { path: 'login', title: 'Login', icon: 'dashboard', class: 'none' },
     //{ path: 'login', title: 'Login', icon: 'dashboard', class: '' },
     //{ path: 'maps', title: 'Maps', icon: 'home', class: '' },
     //{ path: 'Ciudades', title: 'Ciudades', icon: 'location_city', class: '' },

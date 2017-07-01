@@ -29,4 +29,12 @@ export class NavbarComponent implements OnInit{
         }
         return 'Dashboard';
     }
+
+    logout() {
+        this.authenticationService.logout();
+    }
+
+    LoginStatus(): boolean {
+        return this.authenticationService.getLoginStatus();
+    }
 }

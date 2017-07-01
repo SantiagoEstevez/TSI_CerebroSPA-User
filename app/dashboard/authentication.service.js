@@ -62,6 +62,14 @@ var AuthenticationService = (function () {
         this.token = null;
         localStorage.removeItem('token');
     };
+    AuthenticationService.prototype.getLoginStatus = function () {
+        if (localStorage.getItem('token')) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
     AuthenticationService.prototype.handleError = function (error) {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
