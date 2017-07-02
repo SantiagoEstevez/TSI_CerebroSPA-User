@@ -1,6 +1,6 @@
 if ('undefined' !== typeof module) {
 
-    module.exports = function initDemo(){
+    module.exports = function initDemo(ids, valores){
         /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
         dataDailySalesChart = {
@@ -73,14 +73,22 @@ if ('undefined' !== typeof module) {
 
 
         /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
-        console.log("asdasda");
-        var dataEmailsSubscriptionChart = {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-          series: [
-            [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
+        //labels = ids,
+        //series = valores
 
-          ]
+        //var dataEmailsSubscriptionChart = {
+        //      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        //      series: [
+        //        [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
+
+        //      ]
+        //};
+
+        var dataEmailsSubscriptionChart = {
+            labels: ids,
+            series: [valores]
         };
+
         var optionsEmailsSubscriptionChart = {
             axisX: {
                 showGrid: false

@@ -47,6 +47,14 @@ var EventosService = (function () {
             .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
+    EventosService.prototype.getEventosByUsername = function (username, ciudad) {
+        var urlBase = 'http://localhost:6346/api/Usuario/Events/';
+        var url = "" + urlBase + username + "/" + ciudad;
+        return this.http.get(url)
+            .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
     //getEvento(id: number): Promise<Evento> {
     //    const url = `${this.url}/${id}`;
     //    return this.http.get(url)

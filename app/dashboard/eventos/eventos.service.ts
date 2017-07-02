@@ -47,6 +47,16 @@ export class EventosService {
             .catch(this.handleError);
     }
 
+    getEventosByUsername(username: string, ciudad: string): Promise<Evento[]> {
+        const urlBase = 'http://localhost:6346/api/Usuario/Events/';
+        const url = `${urlBase}${username}/${ciudad}`;
+
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json() as Evento[])
+            .catch(this.handleError);
+    }
+
     //getEvento(id: number): Promise<Evento> {
     //    const url = `${this.url}/${id}`;
     //    return this.http.get(url)

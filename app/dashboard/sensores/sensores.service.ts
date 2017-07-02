@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import { Sensor } from './sensor';
 import { Ciudad } from '../ciudades/ciudad';
+import { LecturaSensor } from './lecturasensor';
 
 @Injectable()
 export class SensoresService {
@@ -27,6 +28,14 @@ export class SensoresService {
         return this.http.get(url)
             .toPromise()
             .then(response => response.json().data as Sensor)
+            .catch(this.handleError);
+    }
+
+    getDatosSenores(nombreCiudad: string): Promise<LecturaSensor[]> {
+        const url = `${this.Url}Tabla/${nombreCiudad}`;
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json() as LecturaSensor[])
             .catch(this.handleError);
     }
 
