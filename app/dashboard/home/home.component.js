@@ -10,8 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var initDemo = require('../../../assets/js/charts.js');
+var sensores_service_1 = require('../sensores/sensores.service');
 var HomeComponent = (function () {
-    function HomeComponent() {
+    function HomeComponent(SensoresService) {
+        this.SensoresService = SensoresService;
     }
     HomeComponent.prototype.ngOnInit = function () {
         // $('[data-toggle="checkbox"]').each(function () {
@@ -20,7 +22,21 @@ var HomeComponent = (function () {
         //     var $checkbox = $(this);
         //     $checkbox.checkbox();
         // });
-        initDemo();
+        this.inicializo();
+    };
+    HomeComponent.prototype.inicializo = function () {
+        var _this = this;
+        console.log(localStorage.getItem('ciudad'));
+        this.SensoresService.getDatosSenores(localStorage.getItem('ciudad')).then(function (resp) {
+            _this.lecturas = resp;
+            var ids = [];
+            var valores = [];
+            for (var i = 0; i < _this.lecturas.length; i++) {
+                ids.push(_this.lecturas[i].Latitude.toString());
+                valores.push(_this.lecturas[i].dato);
+            }
+            initDemo(ids, valores);
+        });
     };
     HomeComponent = __decorate([
         core_1.Component({
@@ -28,7 +44,7 @@ var HomeComponent = (function () {
             moduleId: module.id,
             templateUrl: 'home.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [sensores_service_1.SensoresService])
     ], HomeComponent);
     return HomeComponent;
 }());

@@ -32,6 +32,13 @@ var SensoresService = (function () {
             .then(function (response) { return response.json().data; })
             .catch(this.handleError);
     };
+    SensoresService.prototype.getDatosSenores = function (nombreCiudad) {
+        var url = this.Url + "Tabla/" + nombreCiudad;
+        return this.http.get(url)
+            .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
     SensoresService.prototype.delete = function (id) {
         var url = this.Url + "/" + id;
         return this.http.delete(url, { headers: this.headers })

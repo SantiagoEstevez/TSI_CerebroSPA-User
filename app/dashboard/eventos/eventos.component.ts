@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Suscripcion } from './suscripcion';
 
 //Clases
 import { Evento } from './evento';
@@ -24,7 +25,6 @@ export class EventosComponent implements OnInit {
 
     ngOnInit() {
         this.inicializo();
-        alert(localStorage.getItem('ciudad'));
     }
 
     //---> Funciones internas <---
@@ -42,7 +42,7 @@ export class EventosComponent implements OnInit {
 
     //---> Funciones de servicios <---
     getEventos() {
-        this.eventosService.getEventos().then(eventos => {
+        this.eventosService.getEventosByCityName(localStorage.getItem('ciudad')).then(eventos => {
             if (eventos) {
                 for (let e = 0; e < eventos.length; e++) {
                     if (!eventos[e].SendoresAsociados) {
@@ -56,9 +56,13 @@ export class EventosComponent implements OnInit {
     }
 
     setSuscripcionEvento(nuevo: Evento): void {
-        alert("suscribiendo a evento");
-        //this.eventosService.setEventoZona(nuevo).then(() => {
-        //    this.inicializo();
-        //});
+        let sus: Suscripcion = new Suscripcion();
+        sus.IDEvento = nuevo.ID;
+        sus.Username = localStorage.getItem('username');
+        sus.NombreCiudad = localStorage.getItem('ciudad');
+
+        this.eventosService.setSuscribeEvento(sus).then(() => {
+            this.inicializo();
+        });
     }
 }

@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var suscripcion_1 = require('./suscripcion');
 //Servicios.
 var eventos_service_1 = require('./eventos.service');
 var EventosComponent = (function () {
@@ -18,7 +19,6 @@ var EventosComponent = (function () {
     ;
     EventosComponent.prototype.ngOnInit = function () {
         this.inicializo();
-        alert(localStorage.getItem('ciudad'));
     };
     //---> Funciones internas <---
     EventosComponent.prototype.inicializo = function () {
@@ -32,7 +32,7 @@ var EventosComponent = (function () {
     //---> Funciones de servicios <---
     EventosComponent.prototype.getEventos = function () {
         var _this = this;
-        this.eventosService.getEventos().then(function (eventos) {
+        this.eventosService.getEventosByCityName(localStorage.getItem('ciudad')).then(function (eventos) {
             if (eventos) {
                 for (var e = 0; e < eventos.length; e++) {
                     if (!eventos[e].SendoresAsociados) {
@@ -45,10 +45,14 @@ var EventosComponent = (function () {
         });
     };
     EventosComponent.prototype.setSuscripcionEvento = function (nuevo) {
-        alert("suscribiendo a evento");
-        //this.eventosService.setEventoZona(nuevo).then(() => {
-        //    this.inicializo();
-        //});
+        var _this = this;
+        var sus = new suscripcion_1.Suscripcion();
+        sus.IDEvento = nuevo.ID;
+        sus.Username = localStorage.getItem('username');
+        sus.NombreCiudad = localStorage.getItem('ciudad');
+        this.eventosService.setSuscribeEvento(sus).then(function () {
+            _this.inicializo();
+        });
     };
     EventosComponent = __decorate([
         core_1.Component({

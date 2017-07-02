@@ -9,16 +9,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var eventos_service_1 = require('../eventos/eventos.service');
 var TableComponent = (function () {
-    function TableComponent() {
+    function TableComponent(EventosService) {
+        this.EventosService = EventosService;
     }
+    TableComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.EventosService.getEventosByUsername(localStorage.getItem('username'), localStorage.getItem('ciudad')).then(function (res) {
+            _this.MisEventos = res;
+        });
+    };
     TableComponent = __decorate([
         core_1.Component({
             selector: 'table-cmp',
             moduleId: module.id,
             templateUrl: 'table.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [eventos_service_1.EventosService])
     ], TableComponent);
     return TableComponent;
 }());

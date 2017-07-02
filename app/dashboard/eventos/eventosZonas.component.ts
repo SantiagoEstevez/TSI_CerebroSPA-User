@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 //Clases
 import { Evento } from './evento';
 import { Zona } from '../zonas/zona'
+import { Suscripcion } from './suscripcion'
 
 //Servicios.
 import { EventosService } from './eventos.service';
@@ -61,13 +62,14 @@ export class EventosZonasComponent implements OnInit {
         this.setSuscripcionEvento(evento);
     }
 
+
     //---> Funciones de servicios <---
     getEventos(lat: number, lon: number) {
         this.eventos = [];
 
         let zona: Zona = this.zonas.find(z => z.Latitude == lat && z.Longitude == lon);
         if (zona) {
-            this.eventosService.getEventosZona(zona.ID).then(eventos => {
+            this.eventosService.getEventosZonaByCityZone(localStorage.getItem('ciudad'), zona.ID).then(eventos => {
                 if (eventos) {
                     for (let e = 0; e < eventos.length; e++) {
                         if (!eventos[e].SendoresAsociados) {
@@ -81,14 +83,18 @@ export class EventosZonasComponent implements OnInit {
     }
 
     setSuscripcionEvento(nuevo: Evento): void {
-        alert("suscribiendo a evento 2.0");
-        //this.eventosService.setEventoZona(nuevo).then(() => {
-        //    this.inicializo();
-        //});
+        let sus: Suscripcion = new Suscripcion();
+        sus.IDEvento = nuevo.ID;
+        sus.Username = localStorage.getItem('username');
+        sus.NombreCiudad = localStorage.getItem('ciudad');
+
+        this.eventosService.setSuscribeEvento(sus).then(() => {
+            this.inicializo();
+        });
     }
 
     getZonas() {
-        this.ZonasService.getZonas().then(zonas => {
+        this.ZonasService.getZonasByCityName(localStorage.getItem('ciudad')).then(zonas => {
             if (zonas) {
                 this.zonas = zonas;
 

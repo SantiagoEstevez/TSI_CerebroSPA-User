@@ -2,6 +2,7 @@ import { Dispositivo } from './dispositivo';
 
 export class Evento {
     ID: number;
+    Name: string;
     Nombre: string;
     Latitude: number;
     Longitude: number;

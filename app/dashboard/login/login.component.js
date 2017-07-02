@@ -40,6 +40,7 @@ var LoginComponent = (function () {
                 if (result == true) {
                     // login successful
                     localStorage.setItem('ciudad', _this.usuario.Ciudad);
+                    localStorage.setItem('username', _this.usuario.Username);
                     _this.router.navigate(['/']);
                 }
                 else {
@@ -54,6 +55,7 @@ var LoginComponent = (function () {
         if (this.usuario.Ciudad != undefined && this.usuario.Ciudad != "") {
             this.authenticationService.loginFB();
             localStorage.setItem('ciudad', this.usuario.Ciudad);
+            localStorage.setItem('username', this.usuario.Username);
         }
     };
     LoginComponent.prototype.changeCiudad = function (ciudad) {

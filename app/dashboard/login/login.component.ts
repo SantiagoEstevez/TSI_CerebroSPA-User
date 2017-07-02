@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
                 if (result == true) {
                     // login successful
                     localStorage.setItem('ciudad', this.usuario.Ciudad);
+                    localStorage.setItem('username', this.usuario.Username);
                     this.router.navigate(['/']);
                 } else {
                     // login failed
@@ -65,6 +66,7 @@ export class LoginComponent implements OnInit {
         if (this.usuario.Ciudad != undefined && this.usuario.Ciudad != "") {
             this.authenticationService.loginFB();
             localStorage.setItem('ciudad', this.usuario.Ciudad);
+            localStorage.setItem('username', this.usuario.Username);
         }        
     }
 

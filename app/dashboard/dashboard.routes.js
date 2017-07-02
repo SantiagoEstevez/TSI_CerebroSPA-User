@@ -19,7 +19,6 @@ var auth_guard_1 = require('./auth.guard');
 exports.MODULE_ROUTES = [
     { path: 'login', component: login_component_1.LoginComponent },
     { path: 'registro', component: registro_component_1.RegistroComponent },
-    //{ path: 'dashboard', component: HomeComponent },
     //{ path: 'maps', component: MapsComponent },
     //{ path: 'Ciudades', component: CiudadesComponent },
     //{ path: 'TipoSensores', component: TipoSensoresComponent },
@@ -30,6 +29,7 @@ exports.MODULE_ROUTES = [
     { path: 'notifications', component: notifications_component_1.NotificationsComponent, canActivate: [auth_guard_1.AuthGuard] },
     //{ path: 'user', component: UserComponent },
     { path: 'table', component: table_component_1.TableComponent, canActivate: [auth_guard_1.AuthGuard] },
+    { path: 'dashboard', component: home_component_1.HomeComponent, canActivate: [auth_guard_1.AuthGuard] },
     //{ path: 'icons', component: IconsComponent },
     //{ path: 'typography', component: TypographyComponent },
     //{ path: 'upgrade', component: UpgradeComponent },

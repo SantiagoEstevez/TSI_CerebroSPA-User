@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var suscripcion_1 = require('./suscripcion');
 //Servicios.
 var eventos_service_1 = require('./eventos.service');
 var zonas_service_1 = require('../zonas/zonas.service');
@@ -47,7 +48,7 @@ var EventosZonasComponent = (function () {
         this.eventos = [];
         var zona = this.zonas.find(function (z) { return z.Latitude == lat && z.Longitude == lon; });
         if (zona) {
-            this.eventosService.getEventosZona(zona.ID).then(function (eventos) {
+            this.eventosService.getEventosZonaByCityZone(localStorage.getItem('ciudad'), zona.ID).then(function (eventos) {
                 if (eventos) {
                     for (var e = 0; e < eventos.length; e++) {
                         if (!eventos[e].SendoresAsociados) {
@@ -60,14 +61,18 @@ var EventosZonasComponent = (function () {
         }
     };
     EventosZonasComponent.prototype.setSuscripcionEvento = function (nuevo) {
-        alert("suscribiendo a evento 2.0");
-        //this.eventosService.setEventoZona(nuevo).then(() => {
-        //    this.inicializo();
-        //});
+        var _this = this;
+        var sus = new suscripcion_1.Suscripcion();
+        sus.IDEvento = nuevo.ID;
+        sus.Username = localStorage.getItem('username');
+        sus.NombreCiudad = localStorage.getItem('ciudad');
+        this.eventosService.setSuscribeEvento(sus).then(function () {
+            _this.inicializo();
+        });
     };
     EventosZonasComponent.prototype.getZonas = function () {
         var _this = this;
-        this.ZonasService.getZonas().then(function (zonas) {
+        this.ZonasService.getZonasByCityName(localStorage.getItem('ciudad')).then(function (zonas) {
             if (zonas) {
                 _this.zonas = zonas;
                 var _loop_1 = function(z) {

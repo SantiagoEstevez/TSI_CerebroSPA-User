@@ -17,7 +17,7 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let evento of eventos">
-                                    <td>{{evento.Nombre}}</td>
+                                    <td>{{evento.Name}}</td>
                                     <td>{{evento.SendoresAsociados.length}}</td>
                                     <td (click)="suscribirseEvento(evento)"><i class="material-icons link">favorite</i></td>
                                 </tr>
