@@ -64,9 +64,6 @@ var AuthenticationService = (function () {
             localStorage.setItem('token', response.json());
             _this.tipoLogin = "N";
             return true;
-        })
-            .catch(function (response) {
-            return false;
         });
     };
     AuthenticationService.prototype.loginFB = function () {
@@ -119,9 +116,6 @@ var AuthenticationService = (function () {
         return this.http.post(url, JSON.stringify(usuario), { headers: this.headers })
             .map(function (response) {
             return true;
-        })
-            .catch(function (response) {
-            return false;
         });
     };
     AuthenticationService.prototype.handleError = function (error) {

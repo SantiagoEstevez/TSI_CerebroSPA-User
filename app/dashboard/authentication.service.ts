@@ -67,9 +67,6 @@ export class AuthenticationService {
                 localStorage.setItem('token', response.json() as string);
                 this.tipoLogin = "N";
                 return true;
-            })
-            .catch(response => {
-                return false;
             });
     }
 
@@ -125,10 +122,7 @@ export class AuthenticationService {
         const url = 'http://localhost:6346/api/Usuario/RegistroCliente/';
         return this.http.post(url, JSON.stringify(usuario), { headers: this.headers })
             .map(response => {
-                    return true;
-                })
-            .catch(response => {
-                return false;
+                return true;
             });
     }
 
