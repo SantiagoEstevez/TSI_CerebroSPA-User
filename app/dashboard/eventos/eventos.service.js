@@ -15,8 +15,8 @@ var EventosService = (function () {
     function EventosService(http) {
         this.http = http;
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        this.url = 'api/evento'; // URL to web api
-        //private url = 'http://localhost:6346/api/Evento/Global/';
+        //private url = 'api/evento';  // URL to web api
+        this.url = 'http://localhost:6346/api/Evento/Global/';
         this.urlZona = 'http://localhost:6346/api/Evento/Zone/';
     }
     EventosService.prototype.getEventos = function () {
@@ -26,11 +26,25 @@ var EventosService = (function () {
             .then(function (response) { return response.json().data; })
             .catch(this.handleError);
     };
-    EventosService.prototype.getEventosZona = function (idZona) {
-        var url = this.urlZona + "cityLat/" + idZona + "/";
-        return this.http.get(this.url)
+    EventosService.prototype.getEventosByCityName = function (nombreCiudad) {
+        var url = "" + this.url + nombreCiudad + "/";
+        return this.http.get(url)
+            .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    EventosService.prototype.getEventosZonaByCityZone = function (nombreCiudad, idZona) {
+        var url = "" + this.urlZona + nombreCiudad + "/" + idZona + "/";
+        return this.http.get(url)
             .toPromise()
             .then(function (response) { return response.json().data; })
+            .catch(this.handleError);
+    };
+    EventosService.prototype.getEventosZonaByCityName = function (nombreCiudad) {
+        var url = "" + this.urlZona + nombreCiudad + "/";
+        return this.http.get(url)
+            .toPromise()
+            .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     //getEvento(id: number): Promise<Evento> {
@@ -57,6 +71,13 @@ var EventosService = (function () {
     EventosService.prototype.setEventoZona = function (nurevoEvento) {
         return this.http
             .post(this.urlZona, JSON.stringify(nurevoEvento), { headers: this.headers })
+            .toPromise()
+            .then(function (res) { return res.json(); })
+            .catch(this.handleError);
+    };
+    EventosService.prototype.setSuscribeEvento = function (suscripcion) {
+        return this.http
+            .post('http://localhost:6346/api/FrontUsuario/Subscribe/', JSON.stringify(suscripcion), { headers: this.headers })
             .toPromise()
             .then(function (res) { return res.json(); })
             .catch(this.handleError);

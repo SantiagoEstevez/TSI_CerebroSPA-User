@@ -10,10 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
+var router_1 = require('@angular/router');
 require('rxjs/add/operator/map');
 var AuthenticationService = (function () {
-    function AuthenticationService(http) {
+    function AuthenticationService(http, router) {
         this.http = http;
+        this.router = router;
         this.url = 'http://localhost:6346/api/usuario/login';
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         FB.init({
@@ -78,6 +80,7 @@ var AuthenticationService = (function () {
         var _this = this;
         FB.getLoginStatus(function (response) {
             _this.statusChangeCallback(response);
+            //this.router.navigate(['/']);
         });
     };
     AuthenticationService.prototype.statusChangeCallback = function (resp) {
@@ -86,7 +89,6 @@ var AuthenticationService = (function () {
         if (resp.status === 'connected') {
             localStorage.setItem('token', resp.authResponse.accessToken);
             this.tipoLogin = "F";
-            //this.router.navigate(['/']);
             return true;
         }
         else {
@@ -99,9 +101,11 @@ var AuthenticationService = (function () {
         this.token = null;
         localStorage.removeItem('token');
         localStorage.removeItem('ciudad');
+        localStorage.removeItem('username');
         if (this.tipoLogin == "F") {
             FB.logout();
         }
+        this.router.navigate(['login']);
     };
     AuthenticationService.prototype.getLoginStatus = function () {
         if (localStorage.getItem('token')) {
@@ -124,7 +128,7 @@ var AuthenticationService = (function () {
     };
     AuthenticationService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [http_1.Http, router_1.Router])
     ], AuthenticationService);
     return AuthenticationService;
 }());

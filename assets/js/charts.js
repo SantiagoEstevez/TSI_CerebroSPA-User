@@ -73,7 +73,7 @@ if ('undefined' !== typeof module) {
 
 
         /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
-
+        console.log("asdasda");
         var dataEmailsSubscriptionChart = {
           labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
           series: [

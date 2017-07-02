@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 import { Usuario } from '../usuarios/usuario'
@@ -14,7 +15,10 @@ export class AuthenticationService {
     private url = 'http://localhost:6346/api/usuario/login';
     private headers = new Headers({ 'Content-Type': 'application/json' });
 
-    constructor(private http: Http) {
+    constructor(
+        private http: Http,
+        private router: Router
+    ) {
         FB.init({
             appId: '1465232330164930',
             cookie: false,  // enable cookies to allow the server to access
@@ -80,7 +84,8 @@ export class AuthenticationService {
 
     statusFB() {
         FB.getLoginStatus(response => {
-            this.statusChangeCallback(response);
+            this.statusChangeCallback(response)
+                //this.router.navigate(['/']);
         });
     }
 
@@ -91,7 +96,6 @@ export class AuthenticationService {
         if (resp.status === 'connected') {
             localStorage.setItem('token', resp.authResponse.accessToken as string);
             this.tipoLogin = "F";
-            //this.router.navigate(['/']);
             return true;
             // connect here with your server for facebook login by passing access token given by facebook
         } else {
@@ -104,10 +108,12 @@ export class AuthenticationService {
         this.token = null;
         localStorage.removeItem('token');
         localStorage.removeItem('ciudad');
+        localStorage.removeItem('username');
 
         if (this.tipoLogin == "F") {
             FB.logout();
         }
+        this.router.navigate(['login']);
     }
 
     getLoginStatus(): boolean {

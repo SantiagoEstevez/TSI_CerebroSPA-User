@@ -12,17 +12,17 @@ var http_1 = require('@angular/http');
 var core_1 = require('@angular/core');
 require('rxjs/add/operator/toPromise');
 var ZonasService = (function () {
-    //private url = 'http://localhost:6346/api/Evento/Zona/'
     function ZonasService(http) {
         this.http = http;
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        this.url = 'api/zonas'; // URL to web api
+        //private url = 'api/zonas';  // URL to web api
+        this.url = 'http://localhost:6346/api/Evento/Zona/';
     }
     //--> Tipo de sensores <--
     ZonasService.prototype.getZonas = function () {
         return this.http.get(this.url)
             .toPromise()
-            .then(function (response) { return response.json().data; })
+            .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     ZonasService.prototype.getZona = function (lat, lon) {
@@ -44,6 +44,13 @@ var ZonasService = (function () {
             .post(this.url, JSON.stringify(nurevaZona), { headers: this.headers })
             .toPromise()
             .then(function (res) { return res.json().data; })
+            .catch(this.handleError);
+    };
+    ZonasService.prototype.getZonasByCityName = function (nombreCiudad) {
+        var url = "" + this.url + nombreCiudad + "/";
+        return this.http.get(url)
+            .toPromise()
+            .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     ZonasService.prototype.update = function (zona) {

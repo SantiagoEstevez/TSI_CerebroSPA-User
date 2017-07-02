@@ -21,7 +21,6 @@ import { AuthGuard } from './auth.guard';
 export const MODULE_ROUTES: Route[] = [
     { path: 'login', component: LoginComponent },
     { path: 'registro', component: RegistroComponent },
-    //{ path: 'dashboard', component: HomeComponent },
     //{ path: 'maps', component: MapsComponent },
     //{ path: 'Ciudades', component: CiudadesComponent },
     //{ path: 'TipoSensores', component: TipoSensoresComponent },
@@ -32,6 +31,7 @@ export const MODULE_ROUTES: Route[] = [
     { path: 'notifications', component: NotificationsComponent, canActivate: [AuthGuard] },
     //{ path: 'user', component: UserComponent },
     { path: 'table', component: TableComponent, canActivate: [AuthGuard] },
+    { path: 'dashboard', component: HomeComponent, canActivate: [AuthGuard] },
     //{ path: 'icons', component: IconsComponent },
     //{ path: 'typography', component: TypographyComponent },
     //{ path: 'upgrade', component: UpgradeComponent },
