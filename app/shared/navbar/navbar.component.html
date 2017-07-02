@@ -31,7 +31,8 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#" *ngIf="!LoginStatus()" [routerLink]="['login']">Login</a></li>
-                        <li><a href="#" (click)="logout()">Logout</a></li>
+                        <li><a href="#" *ngIf="!LoginStatus()" [routerLink]="['registro']">Registro</a></li>
+                        <li><a href="#" *ngIf="LoginStatus()" (click)="logout()">Logout</a></li>
                     </ul>
                 </li>
             </ul>

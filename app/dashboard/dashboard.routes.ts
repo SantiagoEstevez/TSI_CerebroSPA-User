@@ -15,10 +15,12 @@ import { TipoSensoresComponent } from './tipo-sensores/tipo-sensores.component';
 import { SensoresComponent } from './sensores/sensores.component';
 import { ZonasComponent } from './zonas/zonas.component';
 import { LoginComponent } from './login/login.component';
+import { RegistroComponent } from './login/registro.component';
 import { AuthGuard } from './auth.guard';
 
 export const MODULE_ROUTES: Route[] = [
     { path: 'login', component: LoginComponent },
+    { path: 'registro', component: RegistroComponent },
     //{ path: 'dashboard', component: HomeComponent },
     //{ path: 'maps', component: MapsComponent },
     //{ path: 'Ciudades', component: CiudadesComponent },
@@ -52,5 +54,6 @@ export const MODULE_COMPONENTS = [
     EventosZonasComponent,
     TipoSensoresComponent,
     SensoresComponent,
-    ZonasComponent
+    ZonasComponent,
+    RegistroComponent
 ]

@@ -14,9 +14,11 @@ var tipo_sensores_component_1 = require('./tipo-sensores/tipo-sensores.component
 var sensores_component_1 = require('./sensores/sensores.component');
 var zonas_component_1 = require('./zonas/zonas.component');
 var login_component_1 = require('./login/login.component');
+var registro_component_1 = require('./login/registro.component');
 var auth_guard_1 = require('./auth.guard');
 exports.MODULE_ROUTES = [
     { path: 'login', component: login_component_1.LoginComponent },
+    { path: 'registro', component: registro_component_1.RegistroComponent },
     //{ path: 'dashboard', component: HomeComponent },
     //{ path: 'maps', component: MapsComponent },
     //{ path: 'Ciudades', component: CiudadesComponent },
@@ -48,6 +50,7 @@ exports.MODULE_COMPONENTS = [
     eventosZonas_component_1.EventosZonasComponent,
     tipo_sensores_component_1.TipoSensoresComponent,
     sensores_component_1.SensoresComponent,
-    zonas_component_1.ZonasComponent
+    zonas_component_1.ZonasComponent,
+    registro_component_1.RegistroComponent
 ];
 //# sourceMappingURL=dashboard.routes.js.map

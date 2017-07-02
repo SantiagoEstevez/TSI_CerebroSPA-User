@@ -107,7 +107,7 @@ export class CiudadesComponent implements OnInit {
         if (cantSensores > 0 || cantZonas > 0) {
             alert("No se puede borrar la ciudad ya que hay zonas y/o sensores asociada a ella");
         } else {
-            this.ciudadesService.delete(ciudad.Latitud);
+            //this.ciudadesService.delete(ciudad.Latitud);
             this.inicializar();
         }
     }

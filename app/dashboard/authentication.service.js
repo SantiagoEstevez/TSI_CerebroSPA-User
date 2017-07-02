@@ -16,6 +16,13 @@ var AuthenticationService = (function () {
         this.http = http;
         this.url = 'http://localhost:6346/api/usuario/login';
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        FB.init({
+            appId: '1465232330164930',
+            cookie: false,
+            // the session
+            xfbml: true,
+            version: 'v2.8' // use graph api version 2.5
+        });
         // set token if saved in local storage
         //var currentUser = JSON.parse(localStorage.getItem('currentUser'));
         //this.token = currentUser && currentUser.token;
@@ -50,17 +57,54 @@ var AuthenticationService = (function () {
     //        .catch(this.handleError);
     //}
     AuthenticationService.prototype.login = function (usuario) {
-        return this.http
-            .post(this.url, JSON.stringify(usuario), { headers: this.headers })
+        var _this = this;
+        var url = 'http://localhost:6346/api/Usuario/LoginUsuario/';
+        return this.http.post(url, JSON.stringify(usuario), { headers: this.headers })
             .map(function (response) {
             localStorage.setItem('token', response.json());
+            _this.tipoLogin = "N";
             return true;
+        })
+            .catch(function (response) {
+            return false;
         });
     };
+    AuthenticationService.prototype.loginFB = function () {
+        var _this = this;
+        FB.login(function (response) {
+            FB.getLoginStatus(function (response) {
+                return _this.statusChangeCallback(response);
+            });
+        });
+    };
+    AuthenticationService.prototype.statusFB = function () {
+        var _this = this;
+        FB.getLoginStatus(function (response) {
+            _this.statusChangeCallback(response);
+        });
+    };
+    AuthenticationService.prototype.statusChangeCallback = function (resp) {
+        //resp.status === 'not_authorized' || resp.status === 'unknown'
+        //console.log(resp);
+        if (resp.status === 'connected') {
+            localStorage.setItem('token', resp.authResponse.accessToken);
+            this.tipoLogin = "F";
+            //this.router.navigate(['/']);
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    ;
     AuthenticationService.prototype.logout = function () {
         // clear token remove user from local storage to log user out
         this.token = null;
         localStorage.removeItem('token');
+        localStorage.removeItem('ciudad');
+        if (this.tipoLogin == "F") {
+            FB.logout();
+        }
     };
     AuthenticationService.prototype.getLoginStatus = function () {
         if (localStorage.getItem('token')) {
@@ -69,6 +113,16 @@ var AuthenticationService = (function () {
         else {
             return false;
         }
+    };
+    AuthenticationService.prototype.setUsuario = function (usuario) {
+        var url = 'http://localhost:6346/api/Usuario/RegistroCliente/';
+        return this.http.post(url, JSON.stringify(usuario), { headers: this.headers })
+            .map(function (response) {
+            return true;
+        })
+            .catch(function (response) {
+            return false;
+        });
     };
     AuthenticationService.prototype.handleError = function (error) {
         console.error('An error occurred', error); // for demo purposes only

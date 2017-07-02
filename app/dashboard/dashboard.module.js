@@ -22,8 +22,6 @@ var tipo_sensor_service_1 = require('./tipo-sensores/tipo-sensor.service');
 var sensores_service_1 = require('./sensores/sensores.service');
 var zonas_service_1 = require('./zonas/zonas.service');
 var eventos_service_1 = require('./eventos/eventos.service');
-var angular_in_memory_web_api_1 = require('angular-in-memory-web-api');
-var memoria_service_1 = require('./ciudades/memoria.service');
 var auth_guard_1 = require('./auth.guard');
 var authentication_service_1 = require('./authentication.service');
 var DashboardModule = (function () {
@@ -35,7 +33,6 @@ var DashboardModule = (function () {
                 common_1.CommonModule,
                 forms_1.FormsModule,
                 router_1.RouterModule.forChild(dashboard_routes_1.MODULE_ROUTES),
-                angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(memoria_service_1.MemoriaService) //comentar esta linea para desactivar la parte de memoria.
             ],
             declarations: [dashboard_routes_1.MODULE_COMPONENTS],
             providers: [ciudades_service_1.CiudadesService,

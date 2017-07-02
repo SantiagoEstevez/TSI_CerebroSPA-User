@@ -18,6 +18,7 @@ var EventosComponent = (function () {
     ;
     EventosComponent.prototype.ngOnInit = function () {
         this.inicializo();
+        alert(localStorage.getItem('ciudad'));
     };
     //---> Funciones internas <---
     EventosComponent.prototype.inicializo = function () {

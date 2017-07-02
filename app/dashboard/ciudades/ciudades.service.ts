@@ -12,7 +12,7 @@ export class CiudadesService {
 
     private headers = new Headers({ 'Content-Type': 'application/json' });
     //private Url = 'api/ciudad';  // URL to web api
-    private Url = 'http://localhost:6346/api/ciudad/'
+    private Url = 'http://localhost:6346/api/'
 
     constructor(private http: Http) { }
 
@@ -23,15 +23,16 @@ export class CiudadesService {
             .catch(this.handleError);
     }
 
-    getAll(): Promise<Ciudad[]> {
-        return new Promise(resolve => {
-            // Simulate server latency with 2 second delay
-            setTimeout(() => resolve(this.getUsuarios()), 4000);
-        });
-    }    
+    //getAll(): Promise<Ciudad[]> {
+    //    return new Promise(resolve => {
+    //        // Simulate server latency with 2 second delay
+    //        setTimeout(() => resolve(this.getUsuarios()), 4000);
+    //    });
+    //}    
 
     getCiudades(): Promise<Ciudad[]> {
-        return this.http.get(this.Url)
+        const url = `${this.Url}Ciudad/All/`;
+        return this.http.get(url)
             .toPromise()
             .then(response => response.json() as Ciudad[])
             .catch(this.handleError);
@@ -45,13 +46,13 @@ export class CiudadesService {
             .catch(this.handleError);
     }
 
-    delete(lat: number): Promise<void> {
-        const url = `${this.Url}/"${lat}"`;
-        return this.http.delete(url, { headers: this.headers })
-            .toPromise()
-            .then(() => null)
-            .catch(this.handleError);
-    }
+    //delete(lat: number): Promise<void> {
+    //    const url = `${this.Url}/"${lat}"`;
+    //    return this.http.delete(url, { headers: this.headers })
+    //        .toPromise()
+    //        .then(() => null)
+    //        .catch(this.handleError);
+    //}
 
     setCiudad(nuevaCiudad: Ciudad): Promise<Ciudad> {
         return this.http

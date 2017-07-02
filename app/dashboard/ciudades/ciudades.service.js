@@ -18,7 +18,7 @@ var CiudadesService = (function () {
         this.http = http;
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         //private Url = 'api/ciudad';  // URL to web api
-        this.Url = 'http://localhost:6346/api/ciudad/';
+        this.Url = 'http://localhost:6346/api/';
     }
     CiudadesService.prototype.getUsuarios = function () {
         return this.http.get(this.Url)
@@ -26,15 +26,15 @@ var CiudadesService = (function () {
             .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
-    CiudadesService.prototype.getAll = function () {
-        var _this = this;
-        return new Promise(function (resolve) {
-            // Simulate server latency with 2 second delay
-            setTimeout(function () { return resolve(_this.getUsuarios()); }, 4000);
-        });
-    };
+    //getAll(): Promise<Ciudad[]> {
+    //    return new Promise(resolve => {
+    //        // Simulate server latency with 2 second delay
+    //        setTimeout(() => resolve(this.getUsuarios()), 4000);
+    //    });
+    //}    
     CiudadesService.prototype.getCiudades = function () {
-        return this.http.get(this.Url)
+        var url = this.Url + "Ciudad/All/";
+        return this.http.get(url)
             .toPromise()
             .then(function (response) { return response.json(); })
             .catch(this.handleError);
@@ -46,13 +46,13 @@ var CiudadesService = (function () {
             .then(function (response) { return response.json().data; })
             .catch(this.handleError);
     };
-    CiudadesService.prototype.delete = function (lat) {
-        var url = this.Url + "/\"" + lat + "\"";
-        return this.http.delete(url, { headers: this.headers })
-            .toPromise()
-            .then(function () { return null; })
-            .catch(this.handleError);
-    };
+    //delete(lat: number): Promise<void> {
+    //    const url = `${this.Url}/"${lat}"`;
+    //    return this.http.delete(url, { headers: this.headers })
+    //        .toPromise()
+    //        .then(() => null)
+    //        .catch(this.handleError);
+    //}
     CiudadesService.prototype.setCiudad = function (nuevaCiudad) {
         return this.http
             .post(this.Url, JSON.stringify(nuevaCiudad), { headers: this.headers })

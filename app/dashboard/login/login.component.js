@@ -12,70 +12,67 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var authentication_service_1 = require('../authentication.service');
 var usuario_1 = require('../../usuarios/usuario');
+var ciudades_service_1 = require('../ciudades/ciudades.service');
 var LoginComponent = (function () {
-    function LoginComponent(router, authenticationService) {
+    function LoginComponent(router, authenticationService, ciudadesService) {
         this.router = router;
         this.authenticationService = authenticationService;
+        this.ciudadesService = ciudadesService;
         this.loading = false;
         this.error = '';
-        FB.init({
-            appId: '1465232330164930',
-            cookie: false,
-            // the session
-            xfbml: true,
-            version: 'v2.8' // use graph api version 2.5
-        });
+        this.nombreCampoCiudad = 'Ciudad';
+        this.CampoCiudad = '';
     }
     LoginComponent.prototype.ngOnInit = function () {
-        var _this = this;
         // reset login status
-        this.authenticationService.logout();
-        FB.getLoginStatus(function (response) {
-            _this.statusChangeCallback(response);
-        });
+        //this.authenticationService.logout();
+        this.authenticationService.statusFB();
+        this.usuario = new usuario_1.Usuario;
+        this.CampoCiudad = this.nombreCampoCiudad;
+        this.getCiudades();
     };
-    //---> Funciones internas <---
-    LoginComponent.prototype.statusChangeCallback = function (resp) {
-        console.log(resp);
-        if (resp.status === 'connected') {
-        }
-        else if (resp.status === 'not_authorized') {
-        }
-        else {
-        }
-    };
-    ;
     //---> Funciones de eventos <---
     LoginComponent.prototype.login = function () {
         var _this = this;
-        var usuario = new usuario_1.Usuario();
-        usuario.CI = "477";
-        usuario.Name = "santiago";
-        usuario.Lastname = "estevez";
-        usuario.Username = this.user;
-        usuario.Password = this.password;
-        this.loading = true;
-        this.authenticationService.login(usuario).subscribe(function (result) {
-            if (result == true) {
-                // login successful
-                _this.router.navigate(['/']);
-            }
-            else {
-                // login failed
-                _this.error = 'Username or password is incorrect';
-                _this.loading = false;
-            }
-        });
+        if (this.usuario.Ciudad != undefined && this.usuario.Ciudad != "") {
+            this.loading = true;
+            this.authenticationService.login(this.usuario).subscribe(function (result) {
+                if (result == true) {
+                    // login successful
+                    localStorage.setItem('ciudad', _this.usuario.Ciudad);
+                    _this.router.navigate(['/']);
+                }
+                else {
+                    // login failed
+                    _this.error = 'Username or password is incorrect';
+                    _this.loading = false;
+                }
+            });
+        }
     };
-    LoginComponent.prototype.onFacebookLoginClick = function () {
-        FB.login();
+    LoginComponent.prototype.loginFB = function () {
+        if (this.usuario.Ciudad != undefined && this.usuario.Ciudad != "") {
+            this.authenticationService.loginFB();
+            localStorage.setItem('ciudad', this.usuario.Ciudad);
+        }
+    };
+    LoginComponent.prototype.changeCiudad = function (ciudad) {
+        this.CampoCiudad = ciudad.Nombre;
+        this.usuario.Ciudad = ciudad.Nombre;
+    };
+    //---> Funciones de servicios <---
+    LoginComponent.prototype.getCiudades = function () {
+        var _this = this;
+        this.ciudadesService.getCiudades().then(function (ciudades) {
+            _this.ciudades = ciudades;
+        });
     };
     LoginComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             templateUrl: 'login.component.html'
         }), 
-        __metadata('design:paramtypes', [router_1.Router, authentication_service_1.AuthenticationService])
+        __metadata('design:paramtypes', [router_1.Router, authentication_service_1.AuthenticationService, ciudades_service_1.CiudadesService])
     ], LoginComponent);
     return LoginComponent;
 }());

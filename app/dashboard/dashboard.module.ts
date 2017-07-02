@@ -26,7 +26,7 @@ import { AuthenticationService } from './authentication.service';
         CommonModule,
         FormsModule,
         RouterModule.forChild(MODULE_ROUTES),
-        InMemoryWebApiModule.forRoot(MemoriaService) //comentar esta linea para desactivar la parte de memoria.
+        //InMemoryWebApiModule.forRoot(MemoriaService) //comentar esta linea para desactivar la parte de memoria.
     ],
     declarations: [MODULE_COMPONENTS],
     providers: [CiudadesService,

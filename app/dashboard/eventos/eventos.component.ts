@@ -24,6 +24,7 @@ export class EventosComponent implements OnInit {
 
     ngOnInit() {
         this.inicializo();
+        alert(localStorage.getItem('ciudad'));
     }
 
     //---> Funciones internas <---
