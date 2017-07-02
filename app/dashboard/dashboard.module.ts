@@ -21,6 +21,10 @@ import { MemoriaService } from './ciudades/memoria.service';
 import { AuthGuard } from './auth.guard';
 import { AuthenticationService } from './authentication.service';
 
+//para el chat
+import {ChannelService, SignalrWindow} from "./chat/services/channel.service";
+
+
 @NgModule({
     imports: [
         CommonModule,
@@ -39,7 +43,9 @@ import { AuthenticationService } from './authentication.service';
                 Sensor,
                 Zona,
                 AuthGuard, 
-                AuthenticationService
+                AuthenticationService,
+                ChannelService, 
+                { provide: SignalrWindow, useValue: window }
     ]
 })
 

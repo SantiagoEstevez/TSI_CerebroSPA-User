@@ -14,6 +14,7 @@ import { NavbarModule } from './shared/navbar/navbar.module';
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
+
 @NgModule({
     imports: [
         HttpModule,
@@ -27,7 +28,6 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     ],
     declarations: [ AppComponent, DashboardComponent ],
     providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }
-
     ],
     bootstrap:    [ AppComponent ]
 })

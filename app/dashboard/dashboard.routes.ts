@@ -17,8 +17,10 @@ import { ZonasComponent } from './zonas/zonas.component';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './login/registro.component';
 import { AuthGuard } from './auth.guard';
+import { ChatComponent }   from './chat/chat.component';
 
 export const MODULE_ROUTES: Route[] = [
+    { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'registro', component: RegistroComponent },
     //{ path: 'dashboard', component: HomeComponent },
@@ -40,6 +42,7 @@ export const MODULE_ROUTES: Route[] = [
 ]
 
 export const MODULE_COMPONENTS = [
+    ChatComponent, 
     LoginComponent,
     HomeComponent,
     UserComponent,

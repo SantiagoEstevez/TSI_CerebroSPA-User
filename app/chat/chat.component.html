@@ -1,0 +1,157 @@
+ <style>
+            #letra{
+                margin-left: 25%;
+            }
+            #pos{
+                margin-top: 0%;
+            }
+            #color{
+                color: white;
+            }
+            #posi{
+                margin-right: 25%
+            } 
+            
+.bubble{
+    background-color: #F2F2F2;
+    border-radius: 5px;
+    box-shadow: 0 0 6px #B2B2B2;
+    display: inline-block;
+    padding: 10px 18px;
+    position: relative;
+    vertical-align: top;
+}
+
+.bubble::before {
+    background-color: #F2F2F2;
+    content: "\00a0";
+    display: block;
+    height: 16px;
+    position: absolute;
+    top: 11px;
+    transform:             rotate( 29deg ) skew( -35deg );
+        -moz-transform:    rotate( 29deg ) skew( -35deg );
+        -ms-transform:     rotate( 29deg ) skew( -35deg );
+        -o-transform:      rotate( 29deg ) skew( -35deg );
+        -webkit-transform: rotate( 29deg ) skew( -35deg );
+    width:  20px;
+}
+
+.me {
+    float: left;   
+    margin: 5px 45px 5px 20px;         
+}
+
+.me::before {
+    box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4 );
+    left: -9px;           
+}
+
+.you {
+    float: right;    
+    margin: 5px 80px 5px 45px;         
+}
+
+.you::before {
+    box-shadow: 2px -2px 2px 0 rgba( 178, 178, 178, .4 );
+    right: -9px;    
+}
+.ss {
+  max-width : 800px;
+  height : 500px;
+  overflow: auto;
+  padding : 5px 5px 0px 5px;
+}
+</style>
+
+<div id=letra>
+<div class="main_section">
+    <div class="">
+        <div class="chat_container">
+            <div class="">
+                <div class="row">
+                    <div class="title-block">
+                        <div class="input-group col-md-12">
+                            <h3>Tus Grupos</h3>
+                        </div>
+                    </div>
+                    <div id=color><select #grupos name="Grupos">
+                    <option value='elija'>Elija el grupo</option>
+                    <option *ngFor="let group of groups" value={{group.nombre}}>{{group.nombre}}</option>
+                    </select></div>
+                    <br>
+                    <button class="btn btn-success" (click)="joinGroup(grupos.value);">Conectarse</button>
+                    <button class="btn btn-danger">Desconectarse</button>
+                    <div class="title-block">
+                        <div class="input-group col-md-12">
+                            <span class="pull-left" style="color:#fff;"><strong>{{connectionState | async}}</strong></span>
+                            <span class="badge pull-right" [ngClass]="{ connected:(connectionState | async) === 'Connected', 
+                            reconnect:(connectionState | async) === 'Reconnecting',
+                            disconnected:(connectionState | async) === 'Disconnected'}">&nbsp;</span>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="grupoele()">
+        
+                <div class="row">
+                    <div class="group_message_section">
+                        <h4>Chat del grupo: {{messageData.Group}}</h4>
+                    </div>
+                    <!--group_message_section-->
+                    <div class="chat_area">
+                        <ul class="list-unstyled">
+                            
+                            <li class="left clearfix" *ngFor="let message of messages" >
+                                <div class="chat-body1 clearfix">
+                                    <span>{{message.Name}}: {{message.Message}}</span>
+                                    <div class="chat_time">{{message.DateCreated}}</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--chat_area-->
+                   <div id="posi">
+                    <div class="message_write">
+                        <textarea class="form-control" placeholder="type a message" [(ngModel)]="messageData.Message"></textarea>
+                        <div class="clearfix"></div>
+                        <div class="chat_bottom">
+                            <button type="button" class="pull-right btn btn-success" (click)="sendMessage()">Enviar</button>
+                        </div>
+                    </div>
+                    </div>
+           
+            </div>
+
+            <div class="col-sm-3 chat_sidebar" >
+                <div class="row">
+                    <div class="title-block">
+                        <div class="input-group col-md-12">
+                            <h4>Miembros:</h4>
+                        </div>
+                    </div>
+                    <div class="member_list">
+                        <ul class="list-unstyled">
+                            <li class="left clearfix" *ngFor="let member of sortMembers()">
+                                <span class="chat-img pull-left">
+                                    <img src="https://www.gravatar.com/avatar/{{member.Photo}}?s=50&d=mm" alt="User Avatar" class="img-circle">
+                                </span>
+                                <div class="chat-body clearfix">
+                                    <div class="header_sec">
+                                        <strong class="primary-font">{{member.Name}}</strong>
+                                        <!--<span class="badge pull-right connected">&nbsp;</span>-->
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</div>
+</div>
