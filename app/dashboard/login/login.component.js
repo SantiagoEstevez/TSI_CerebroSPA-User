@@ -40,6 +40,8 @@ var LoginComponent = (function () {
                 if (result == true) {
                     // login successful
                     localStorage.setItem('ciudad', _this.usuario.Ciudad);
+                    localStorage.setItem('latitud', _this.lat.toString());
+                    localStorage.setItem('longitud', _this.lon.toString());
                     localStorage.setItem('username', _this.usuario.Username);
                     _this.router.navigate(['/']);
                 }
@@ -55,12 +57,16 @@ var LoginComponent = (function () {
         if (this.usuario.Ciudad != undefined && this.usuario.Ciudad != "") {
             this.authenticationService.loginFB();
             localStorage.setItem('ciudad', this.usuario.Ciudad);
+            localStorage.setItem('latitud', this.lat.toString());
+            localStorage.setItem('longitud', this.lon.toString());
             localStorage.setItem('username', this.usuario.Username);
         }
     };
     LoginComponent.prototype.changeCiudad = function (ciudad) {
         this.CampoCiudad = ciudad.Nombre;
         this.usuario.Ciudad = ciudad.Nombre;
+        this.lat = ciudad.Latitud;
+        this.lon = ciudad.Longitud;
     };
     //---> Funciones de servicios <---
     LoginComponent.prototype.getCiudades = function () {

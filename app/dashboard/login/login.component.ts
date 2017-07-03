@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit {
     CampoCiudad: string = '';
     ciudades: Ciudad[];
     usuario: Usuario;
+    lat: number;
+    lon: number;
 
     constructor(
         private router: Router,
@@ -51,6 +53,8 @@ export class LoginComponent implements OnInit {
                 if (result == true) {
                     // login successful
                     localStorage.setItem('ciudad', this.usuario.Ciudad);
+                    localStorage.setItem('latitud', this.lat.toString());
+                    localStorage.setItem('longitud', this.lon.toString());
                     localStorage.setItem('username', this.usuario.Username);
                     this.router.navigate(['/']);
                 } else {
@@ -66,6 +70,8 @@ export class LoginComponent implements OnInit {
         if (this.usuario.Ciudad != undefined && this.usuario.Ciudad != "") {
             this.authenticationService.loginFB();
             localStorage.setItem('ciudad', this.usuario.Ciudad);
+            localStorage.setItem('latitud', this.lat.toString());
+            localStorage.setItem('longitud', this.lon.toString());
             localStorage.setItem('username', this.usuario.Username);
         }        
     }
@@ -73,6 +79,8 @@ export class LoginComponent implements OnInit {
     changeCiudad(ciudad: Ciudad) {
         this.CampoCiudad = ciudad.Nombre;
         this.usuario.Ciudad = ciudad.Nombre;
+        this.lat = ciudad.Latitud;
+        this.lon = ciudad.Longitud;
     }
 
 

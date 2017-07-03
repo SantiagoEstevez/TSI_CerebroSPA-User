@@ -101,6 +101,8 @@ var AuthenticationService = (function () {
         this.token = null;
         localStorage.removeItem('token');
         localStorage.removeItem('ciudad');
+        localStorage.removeItem('latitud');
+        localStorage.removeItem('longitud');
         localStorage.removeItem('username');
         if (this.tipoLogin == "F") {
             FB.logout();

@@ -21,7 +21,7 @@ var EventosZonasComponent = (function () {
     ;
     EventosZonasComponent.prototype.ngOnInit = function () {
         //Cargo mapa
-        var myLatlng = new google.maps.LatLng(-34.9114282, -56.1725558);
+        var myLatlng = new google.maps.LatLng(localStorage.getItem('latitud'), localStorage.getItem('longitud'));
         var mapOptions = {
             zoom: 13,
             center: myLatlng,
