@@ -23,14 +23,14 @@
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
-                                    <th>Cantidad sensores asociados.</th>
+                                    <!--<th>Cantidad sensores asociados.</th>-->
                                     <th>Suscribirse</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let evento of eventos">
-                                    <td>{{evento.Nombre}}</td>
-                                    <td>{{evento.SendoresAsociados.length}}</td>
+                                    <td>{{evento.Name}}</td>
+                                    <!--<td>{{evento.SendoresAsociados.length}}</td>-->
                                     <td (click)="suscribirseEvento(evento)"><i class="material-icons link">favorite</i></td>
                                 </tr>
                             </tbody>

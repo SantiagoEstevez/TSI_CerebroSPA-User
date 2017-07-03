@@ -35,7 +35,7 @@ export class EventosService {
         const url = `${this.urlZona}${nombreCiudad}/${idZona}/`;
         return this.http.get(url)
             .toPromise()
-            .then(response => response.json().data as Evento[])
+            .then(response => response.json() as Evento[])
             .catch(this.handleError);
     }
 

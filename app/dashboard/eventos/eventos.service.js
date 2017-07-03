@@ -37,7 +37,7 @@ var EventosService = (function () {
         var url = "" + this.urlZona + nombreCiudad + "/" + idZona + "/";
         return this.http.get(url)
             .toPromise()
-            .then(function (response) { return response.json().data; })
+            .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     EventosService.prototype.getEventosZonaByCityName = function (nombreCiudad) {
