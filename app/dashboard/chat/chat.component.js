@@ -24,27 +24,44 @@ var ChatComponent = (function () {
     };
     //---> Funciones internas <---
     ChatComponent.prototype.inicializo = function () {
-        this.chats = ['assas', 'dasdasda'];
+        this.chats = [];
         this.CampoAgupaciones = this.NombreCampoAgupaciones;
         this.agrupaciones = [];
+        this.getMisAgrupaciones();
         this.inicializoAgrupacion();
-        this.getAgrupaciones();
-        this.initializePolling();
+        this.inicializoMensaje();
     };
     ChatComponent.prototype.inicializoAgrupacion = function () {
         this.oAgrupacion = new agrupacion_1.Agrupacion();
+        this.getAgrupaciones();
+    };
+    ChatComponent.prototype.inicializoMensaje = function () {
+        this.oMensaje = new mensaje_1.Mensaje();
     };
     //---> Funciones de eventos <---
     ChatComponent.prototype.suscribeAgrupacion = function (agrupacion) {
-        alert("suscribiendo..");
+        var _this = this;
+        agrupacion.Nombre = localStorage.getItem('username');
+        this.ChatService.setSuscripcion(agrupacion).then(function () {
+            _this.getMisAgrupaciones();
+        });
     };
     ChatComponent.prototype.changeAgrupacion = function (agrupacion) {
         this.CampoAgupaciones = agrupacion.NombreAgrupacion;
-        alert("cambiando agrupacion..");
+        this.initializePolling(agrupacion);
     };
     ChatComponent.prototype.enviarMensaje = function () {
+        var _this = this;
         if (this.oMensaje.Contenido != undefined && this.oMensaje.Contenido != "") {
-            alert("enviar mensaje..");
+            if (this.CampoAgupaciones != undefined && this.CampoAgupaciones != this.NombreCampoAgupaciones) {
+                this.oMensaje.Nombre = localStorage.getItem('username');
+                this.oMensaje.NombreAgrupacion = this.CampoAgupaciones;
+                this.oMensaje.NombreCiudad = localStorage.getItem('ciudad');
+                this.oMensaje.HoraPublicacion = Date.now().toString();
+                this.ChatService.setMensaje(this.oMensaje).then(function () {
+                    _this.inicializoMensaje();
+                });
+            }
         }
     };
     ChatComponent.prototype.agregarAgrupacion = function () {
@@ -66,14 +83,20 @@ var ChatComponent = (function () {
             _this.agrupaciones = res;
         });
     };
-    ChatComponent.prototype.initializePolling = function () {
+    ChatComponent.prototype.getMisAgrupaciones = function () {
+        var _this = this;
+        this.ChatService.getAgrupacionesByUsername(localStorage.getItem('ciudad'), localStorage.getItem('username')).subscribe(function (res) {
+            _this.MisAgrupaciones = res;
+        });
+    };
+    ChatComponent.prototype.initializePolling = function (agrupacion) {
+        var _this = this;
         this.chats.push("nuevo1");
         IntervalObservable_1.IntervalObservable.create(1000).subscribe(function (n) {
-            //return this.chats.push("nuevo");
+            _this.ChatService.getChats(localStorage.getItem('ciudad'), agrupacion.Nombre).subscribe(function (res) {
+                _this.chats = res;
+            });
         });
-        //this.chats.push("nuevo1");
-        //return Observable.interval(600).flatMap(() => {
-        //});
     };
     ChatComponent = __decorate([
         core_1.Component({

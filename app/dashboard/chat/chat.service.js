@@ -12,24 +12,31 @@ var http_1 = require('@angular/http');
 var core_1 = require('@angular/core');
 require('rxjs/add/operator/toPromise');
 var ChatService = (function () {
+    //private url = 'http://localhost:6346/api/Evento/Global/';
     function ChatService(http) {
         this.http = http;
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        this.url = 'http://localhost:6346/api/Evento/Global/';
     }
     ChatService.prototype.getAgrupaciones = function (nombreCiudad) {
-        var url = "" + this.url + nombreCiudad + "/";
+        var urlBase = 'http://localhost:6346/api/Chat/AgrupacionesDeCiudad/';
+        var url = "" + urlBase + nombreCiudad + "/";
         return this.http.get(url)
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };
-    ChatService.prototype.getAgrupacionesByUsername = function (nombreCiudad) {
-        var url = "" + this.url + nombreCiudad + "/";
+    ChatService.prototype.getAgrupacionesByUsername = function (nombreCiudad, nombreUsuario) {
+        var urlBase = 'http://localhost:6346/api/Chat/AgrupacionesDeUsuario/';
+        var url = "" + urlBase + nombreCiudad + "/" + nombreUsuario + "/";
         return this.http.get(url)
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };
-    ChatService.prototype.getChats = function () {
+    ChatService.prototype.getChats = function (nombreCiudad, nombreAgrup) {
+        var urlBase = 'http://localhost:6346/api/Chat/ObtenerChat/';
+        var url = "" + urlBase + nombreCiudad + "/" + nombreAgrup + "/";
+        return this.http.get(url)
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
     };
     //setEvento(nurevoEvento: Evento): Promise<Evento> {
     //    return this.http
@@ -46,7 +53,21 @@ var ChatService = (function () {
             .then(function (res) { return res.json(); })
             .catch(this.handleError);
     };
-    ChatService.prototype.setMensaje = function () {
+    ChatService.prototype.setSuscripcion = function (agrupacion) {
+        var url = 'http://localhost:6346/api/Chat/SubscribirseAgrupacion/';
+        return this.http
+            .post(url, JSON.stringify(agrupacion), { headers: this.headers })
+            .toPromise()
+            .then(function (res) { return res.json(); })
+            .catch(this.handleError);
+    };
+    ChatService.prototype.setMensaje = function (mensaje) {
+        var url = 'http://localhost:6346/api/Chat/NuevoMensaje/';
+        return this.http
+            .post(url, JSON.stringify(mensaje), { headers: this.headers })
+            .toPromise()
+            .then(function (res) { return res.json(); })
+            .catch(this.handleError);
     };
     ChatService.prototype.handleError = function (error) {
         console.error('An error occurred', error); // for demo purposes only
