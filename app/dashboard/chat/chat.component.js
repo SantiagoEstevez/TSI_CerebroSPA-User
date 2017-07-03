@@ -14,6 +14,7 @@ var agrupacion_1 = require('./agrupacion');
 var mensaje_1 = require('./mensaje');
 var IntervalObservable_1 = require('rxjs/observable/IntervalObservable');
 var ChatComponent = (function () {
+    //Polling: IntervalObservable = IntervalObservable.create(1000);
     function ChatComponent(ChatService) {
         this.ChatService = ChatService;
         this.NombreCampoAgupaciones = "Agrupaciones";
@@ -21,6 +22,9 @@ var ChatComponent = (function () {
     }
     ChatComponent.prototype.ngOnInit = function () {
         this.inicializo();
+        if (this.suscripcion) {
+            this.suscripcion.unsubscribe();
+        }
     };
     //---> Funciones internas <---
     ChatComponent.prototype.inicializo = function () {
@@ -91,8 +95,12 @@ var ChatComponent = (function () {
     };
     ChatComponent.prototype.initializePolling = function (agrupacion) {
         var _this = this;
-        IntervalObservable_1.IntervalObservable.create(1000).subscribe(function (n) {
-            _this.ChatService.getChats(localStorage.getItem('ciudad'), agrupacion.Nombre).subscribe(function (res) {
+        if (this.suscripcion) {
+            this.suscripcion.unsubscribe();
+        }
+        this.suscripcion = IntervalObservable_1.IntervalObservable.create(1000).subscribe(function (n) {
+            _this.ChatService.getChats(localStorage.getItem('ciudad'), agrupacion.NombreAgrupacion).subscribe(function (res) {
+                console.log("pidiendo");
                 _this.chats = res;
             });
         });

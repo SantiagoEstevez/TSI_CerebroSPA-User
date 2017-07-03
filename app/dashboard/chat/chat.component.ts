@@ -22,13 +22,19 @@ export class ChatComponent implements OnInit {
     agrupaciones: Agrupacion[];
     MisAgrupaciones: Agrupacion[];
     chats: Chat[];
+    suscripcion: any;
+    //Polling: IntervalObservable = IntervalObservable.create(1000);
 
     constructor(
-        private ChatService: ChatService
+        private ChatService: ChatService,
     ) { }
 
     ngOnInit() {
         this.inicializo();
+
+        if (this.suscripcion) {
+            this.suscripcion.unsubscribe();
+        }
     }
 
     //---> Funciones internas <---
@@ -106,8 +112,13 @@ export class ChatComponent implements OnInit {
     }
 
     initializePolling(agrupacion: Agrupacion) {
-        IntervalObservable.create(1000).subscribe(n => {
-            this.ChatService.getChats(localStorage.getItem('ciudad'), agrupacion.Nombre).subscribe(res => {
+        if (this.suscripcion) {
+            this.suscripcion.unsubscribe();
+        }
+
+        this.suscripcion = IntervalObservable.create(1000).subscribe(n => {
+            this.ChatService.getChats(localStorage.getItem('ciudad'), agrupacion.NombreAgrupacion).subscribe(res => {
+                console.log("pidiendo");
                 this.chats = res;
             });
         });
