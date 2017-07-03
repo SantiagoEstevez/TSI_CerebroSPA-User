@@ -1,0 +1,99 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Nueva agrupacion</h4>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <div class="col-md-8">
+                            <div class="form-group form-black label-floating is-empty">
+                                <label class="control-label">Nombre</label>
+                                <input [(ngModel)]="oAgrupacion.NombreAgrupacion" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-danger pull-left" (click)="agregarAgrupacion()">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Agrupaciones</h4>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Suscribe</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let agrupacion of agrupaciones">
+                                    <td>{{agrupacion.NombreAgrupacion}}</td>
+                                    <td (click)="suscribeAgrupacion(agrupacion)"><i class="material-icons link">favorite</i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Chat</h4>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle dropdown-Width" type="button" data-toggle="dropdown">
+                                            <span>{{CampoAgupaciones}}</span>
+                                            <span class="caret">  </span>
+                                        </button>
+                                        <ul class="dropdown-menu" style="z-index: 2;">
+                                            <li *ngFor="let MiAgrupacion of MisAgrupaciones">
+                                                <a (click)="changeAgrupacion(MiAgrupacion)" style="cursor: pointer;">{{MiAgrupacion.NombreAgrupacion}}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <div class="row" *ngFor="let chat of chats">
+                                        <p>{{chat}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label class="control-label">Mensaje</label>
+                                    <input [(ngModel)]="oMensaje.Contenido" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-danger pull-left" (click)="enviarMensaje()">Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

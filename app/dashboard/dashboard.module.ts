@@ -22,7 +22,7 @@ import { AuthGuard } from './auth.guard';
 import { AuthenticationService } from './authentication.service';
 
 //para el chat
-import {ChannelService, SignalrWindow} from "./chat/services/channel.service";
+import { ChatService } from "./chat/chat.service";
 
 
 @NgModule({
@@ -44,8 +44,7 @@ import {ChannelService, SignalrWindow} from "./chat/services/channel.service";
                 Zona,
                 AuthGuard, 
                 AuthenticationService,
-                ChannelService, 
-                { provide: SignalrWindow, useValue: window }
+                ChatService
     ]
 })
 

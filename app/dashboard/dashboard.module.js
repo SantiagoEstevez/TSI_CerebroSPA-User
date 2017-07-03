@@ -24,6 +24,8 @@ var zonas_service_1 = require('./zonas/zonas.service');
 var eventos_service_1 = require('./eventos/eventos.service');
 var auth_guard_1 = require('./auth.guard');
 var authentication_service_1 = require('./authentication.service');
+//para el chat
+var chat_service_1 = require("./chat/chat.service");
 var DashboardModule = (function () {
     function DashboardModule() {
     }
@@ -45,7 +47,8 @@ var DashboardModule = (function () {
                 sensor_1.Sensor,
                 zona_1.Zona,
                 auth_guard_1.AuthGuard,
-                authentication_service_1.AuthenticationService
+                authentication_service_1.AuthenticationService,
+                chat_service_1.ChatService
             ]
         }), 
         __metadata('design:paramtypes', [])

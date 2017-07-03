@@ -14,5 +14,6 @@ exports.ROUTES = [
     { path: 'dashboard', title: 'Reportes', icon: 'dashboard', class: '' },
     //{ path: 'user', title: 'User Profile',  icon:'person', class: '' },
     { path: 'table', title: 'Mis eventos', icon: 'content_paste', class: '' },
+    { path: 'chat', title: 'Chat', icon: 'chrome_reader_mode', class: '' },
 ];
 //# sourceMappingURL=sidebar-routes.config.js.map

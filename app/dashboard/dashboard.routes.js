@@ -16,7 +16,9 @@ var zonas_component_1 = require('./zonas/zonas.component');
 var login_component_1 = require('./login/login.component');
 var registro_component_1 = require('./login/registro.component');
 var auth_guard_1 = require('./auth.guard');
+var chat_component_1 = require('./chat/chat.component');
 exports.MODULE_ROUTES = [
+    { path: 'chat', component: chat_component_1.ChatComponent, canActivate: [auth_guard_1.AuthGuard] },
     { path: 'login', component: login_component_1.LoginComponent },
     { path: 'registro', component: registro_component_1.RegistroComponent },
     //{ path: 'maps', component: MapsComponent },
@@ -36,6 +38,7 @@ exports.MODULE_ROUTES = [
     { path: '', redirectTo: 'notifications', pathMatch: 'full' }
 ];
 exports.MODULE_COMPONENTS = [
+    chat_component_1.ChatComponent,
     login_component_1.LoginComponent,
     home_component_1.HomeComponent,
     user_component_1.UserComponent,
