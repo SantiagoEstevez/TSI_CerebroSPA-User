@@ -74,11 +74,11 @@ export class LoginComponent implements OnInit {
             this.usuario.Email = 'santiago.estevez.m@gmail.com';
             this.usuario.Username = 'facebook';
             this.usuario.Password = 'facebook'
+            localStorage.setItem('username', this.usuario.Username);
+            localStorage.setItem('ciudad', this.usuario.Ciudad);
+            localStorage.setItem('latitud', this.lat.toString());
+            localStorage.setItem('longitud', this.lon.toString());
             this.authenticationService.setUsuario(this.usuario).subscribe(res => {
-                localStorage.setItem('username', this.usuario.Username);
-                localStorage.setItem('ciudad', this.usuario.Ciudad);
-                localStorage.setItem('latitud', this.lat.toString());
-                localStorage.setItem('longitud', this.lon.toString());
             });
         }        
     }
