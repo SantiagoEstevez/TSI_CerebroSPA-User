@@ -21,20 +21,20 @@ var ChatComponent = (function () {
     }
     ChatComponent.prototype.ngOnInit = function () {
         this.inicializo();
-        //this.ChatService.getAgrupaciones(localStorage.getItem('ciudad')).subscribe(res => {
-        //    this.agrupaciones = res;
-        //});
     };
+    //---> Funciones internas <---
     ChatComponent.prototype.inicializo = function () {
         this.chats = ['assas', 'dasdasda'];
         this.CampoAgupaciones = this.NombreCampoAgupaciones;
         this.agrupaciones = [];
         this.inicializoAgrupacion();
+        this.getAgrupaciones();
         this.initializePolling();
     };
     ChatComponent.prototype.inicializoAgrupacion = function () {
         this.oAgrupacion = new agrupacion_1.Agrupacion();
     };
+    //---> Funciones de eventos <---
     ChatComponent.prototype.suscribeAgrupacion = function (agrupacion) {
         alert("suscribiendo..");
     };
@@ -58,6 +58,13 @@ var ChatComponent = (function () {
         else {
             alert("Debe definir nombre agrupacion.");
         }
+    };
+    //---> Funciones de servicios <---
+    ChatComponent.prototype.getAgrupaciones = function () {
+        var _this = this;
+        this.ChatService.getAgrupaciones(localStorage.getItem('ciudad')).subscribe(function (res) {
+            _this.agrupaciones = res;
+        });
     };
     ChatComponent.prototype.initializePolling = function () {
         this.chats.push("nuevo1");

@@ -29,18 +29,18 @@ export class ChatComponent implements OnInit {
 
     ngOnInit() {
         this.inicializo();
-
-        //this.ChatService.getAgrupaciones(localStorage.getItem('ciudad')).subscribe(res => {
-        //    this.agrupaciones = res;
-        //});
     }
 
+    //---> Funciones internas <---
     inicializo() {
         this.chats = ['assas', 'dasdasda'];
         this.CampoAgupaciones = this.NombreCampoAgupaciones;
         this.agrupaciones = [];
 
         this.inicializoAgrupacion();
+
+        this.getAgrupaciones();
+
         this.initializePolling();
     }
 
@@ -48,6 +48,8 @@ export class ChatComponent implements OnInit {
         this.oAgrupacion = new Agrupacion()
     }
 
+
+    //---> Funciones de eventos <---
     suscribeAgrupacion(agrupacion: Agrupacion) {
         alert("suscribiendo..");
     }
@@ -74,6 +76,13 @@ export class ChatComponent implements OnInit {
         }
     }
 
+    //---> Funciones de servicios <---
+    getAgrupaciones() {
+        this.ChatService.getAgrupaciones(localStorage.getItem('ciudad')).subscribe(res => {
+            this.agrupaciones = res;
+        });
+    }
+
     initializePolling() {
         this.chats.push("nuevo1");
         IntervalObservable.create(1000).subscribe(n => {
@@ -82,7 +91,7 @@ export class ChatComponent implements OnInit {
 
         //this.chats.push("nuevo1");
         //return Observable.interval(600).flatMap(() => {
-            
+
         //});
     }
 }

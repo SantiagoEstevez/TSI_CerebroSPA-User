@@ -23,6 +23,14 @@ var ChatService = (function () {
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };
+    ChatService.prototype.getAgrupacionesByUsername = function (nombreCiudad) {
+        var url = "" + this.url + nombreCiudad + "/";
+        return this.http.get(url)
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    ChatService.prototype.getChats = function () {
+    };
     //setEvento(nurevoEvento: Evento): Promise<Evento> {
     //    return this.http
     //        .post(this.url, JSON.stringify(nurevoEvento), { headers: this.headers })
@@ -37,6 +45,8 @@ var ChatService = (function () {
             .toPromise()
             .then(function (res) { return res.json(); })
             .catch(this.handleError);
+    };
+    ChatService.prototype.setMensaje = function () {
     };
     ChatService.prototype.handleError = function (error) {
         console.error('An error occurred', error); // for demo purposes only

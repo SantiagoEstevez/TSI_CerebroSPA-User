@@ -21,6 +21,17 @@ export class ChatService {
             .catch(this.handleError);
     }
 
+    getAgrupacionesByUsername(nombreCiudad: string): Observable<Agrupacion[]> {
+        const url = `${this.url}${nombreCiudad}/`;
+        return this.http.get(url)
+            .map(response => response.json() as Agrupacion[])
+            .catch(this.handleError);
+    }
+
+    getChats() {
+
+    }
+
     //setEvento(nurevoEvento: Evento): Promise<Evento> {
     //    return this.http
     //        .post(this.url, JSON.stringify(nurevoEvento), { headers: this.headers })
@@ -36,6 +47,10 @@ export class ChatService {
             .toPromise()
             .then(res => res.json() as Agrupacion)
             .catch(this.handleError);
+    }
+
+    setMensaje() {
+
     }
 
     private handleError(error: any): Promise<any> {
