@@ -25,6 +25,11 @@ var SensoresService = (function () {
         return this.http.get(Url)
             .map(function (response) { return response.json(); });
     };
+    SensoresService.prototype.getSensoresByCityName = function (nombreCiudad) {
+        var Url = "" + this.Url + nombreCiudad + "/";
+        return this.http.get(Url)
+            .map(function (response) { return response.json(); });
+    };
     SensoresService.prototype.getTipoSensor = function (id) {
         var url = this.Url + "/" + id;
         return this.http.get(url)

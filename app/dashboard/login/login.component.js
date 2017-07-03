@@ -54,12 +54,19 @@ var LoginComponent = (function () {
         }
     };
     LoginComponent.prototype.loginFB = function () {
+        var _this = this;
         if (this.usuario.Ciudad != undefined && this.usuario.Ciudad != "") {
             this.authenticationService.loginFB();
-            localStorage.setItem('ciudad', this.usuario.Ciudad);
-            localStorage.setItem('latitud', this.lat.toString());
-            localStorage.setItem('longitud', this.lon.toString());
-            localStorage.setItem('username', this.usuario.Username);
+            this.usuario.Name = 'facebook';
+            this.usuario.Email = 'santiago.estevez.m@gmail.com';
+            this.usuario.Username = 'facebook';
+            this.usuario.Password = 'facebook';
+            this.authenticationService.setUsuario(this.usuario).subscribe(function (res) {
+                localStorage.setItem('username', _this.usuario.Username);
+                localStorage.setItem('ciudad', _this.usuario.Ciudad);
+                localStorage.setItem('latitud', _this.lat.toString());
+                localStorage.setItem('longitud', _this.lon.toString());
+            });
         }
     };
     LoginComponent.prototype.changeCiudad = function (ciudad) {

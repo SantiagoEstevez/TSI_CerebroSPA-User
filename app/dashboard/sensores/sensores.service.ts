@@ -23,6 +23,12 @@ export class SensoresService {
             .map(response => response.json() as Sensor[]);
     }
 
+    getSensoresByCityName(nombreCiudad: string): Observable<Sensor[]> {
+        const Url = `${this.Url}${nombreCiudad}/`;
+        return this.http.get(Url)
+            .map(response => response.json() as Sensor[]);
+    }
+
     getTipoSensor(id: number): Promise<Sensor> {
         const url = `${this.Url}/${id}`;
         return this.http.get(url)

@@ -8,6 +8,7 @@ import { Suscripcion } from './suscripcion'
 //Servicios.
 import { EventosService } from './eventos.service';
 import { ZonasService } from '../zonas/zonas.service'
+import { SensoresService } from '../sensores/sensores.service';
 
 declare var google: any;
 
@@ -21,7 +22,8 @@ export class EventosZonasComponent implements OnInit {
 
     constructor(
         private eventosService: EventosService,
-        private ZonasService: ZonasService
+        private ZonasService: ZonasService,
+        private SensoresService: SensoresService
     ) { };
     
     //Objetos
@@ -31,6 +33,7 @@ export class EventosZonasComponent implements OnInit {
     eventos: Evento[];
     zonas: Zona[];
     zonasMapa: any[];
+    sensoresMapa: any[];
 
 
     ngOnInit() {
@@ -52,8 +55,24 @@ export class EventosZonasComponent implements OnInit {
         this.eventos = [];
         this.zonas = [];
         this.zonasMapa = [];
+        this.sensoresMapa = [];
 
         this.getZonas();
+        this.getSensores();
+    }
+
+    borrarZonasMapa() {
+        for (let i = 0; i < this.zonasMapa.length; i++) {
+            this.zonasMapa[i].setMap(null);
+        }
+        this.zonasMapa = [];
+    }
+
+    borrarSensoresMapa() {
+        for (let i = 0; i < this.sensoresMapa.length; i++) {
+            this.sensoresMapa[i].setMap(null);
+        }
+        this.sensoresMapa = [];
     }
 
 
@@ -70,7 +89,11 @@ export class EventosZonasComponent implements OnInit {
         let zona: Zona = this.zonas.find(z => z.Latitude == lat && z.Longitude == lon);
         if (zona) {
             this.eventosService.getEventosZonaByCityZone(localStorage.getItem('ciudad'), zona.ID).then(eventos => {
+                console.log("1");
+                console.log(eventos);
                 if (eventos) {
+                    console.log("asdads");
+                    console.log(eventos);
                     for (let e = 0; e < eventos.length; e++) {
                         if (!eventos[e].SendoresAsociados) {
                             eventos[e].SendoresAsociados = [];
@@ -93,7 +116,26 @@ export class EventosZonasComponent implements OnInit {
         });
     }
 
+
+    getSensores(): void {
+        this.borrarSensoresMapa();
+
+        this.SensoresService.getSensoresByCityName(localStorage.getItem('ciudad')).subscribe(sensores => {
+            for (var i = 0; i < sensores.length; i++) {
+                let marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(sensores[i].Latitude, sensores[i].Longitude),
+                    title: sensores[i].Tipo,
+                    map: this.map
+                });
+
+                this.sensoresMapa.push(marker);
+            }
+        });
+    }
+
     getZonas() {
+        this.borrarZonasMapa();
+
         this.ZonasService.getZonasByCityName(localStorage.getItem('ciudad')).then(zonas => {
             if (zonas) {
                 this.zonas = zonas;

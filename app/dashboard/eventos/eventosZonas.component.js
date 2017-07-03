@@ -13,10 +13,12 @@ var suscripcion_1 = require('./suscripcion');
 //Servicios.
 var eventos_service_1 = require('./eventos.service');
 var zonas_service_1 = require('../zonas/zonas.service');
+var sensores_service_1 = require('../sensores/sensores.service');
 var EventosZonasComponent = (function () {
-    function EventosZonasComponent(eventosService, ZonasService) {
+    function EventosZonasComponent(eventosService, ZonasService, SensoresService) {
         this.eventosService = eventosService;
         this.ZonasService = ZonasService;
+        this.SensoresService = SensoresService;
     }
     ;
     EventosZonasComponent.prototype.ngOnInit = function () {
@@ -36,7 +38,21 @@ var EventosZonasComponent = (function () {
         this.eventos = [];
         this.zonas = [];
         this.zonasMapa = [];
+        this.sensoresMapa = [];
         this.getZonas();
+        this.getSensores();
+    };
+    EventosZonasComponent.prototype.borrarZonasMapa = function () {
+        for (var i = 0; i < this.zonasMapa.length; i++) {
+            this.zonasMapa[i].setMap(null);
+        }
+        this.zonasMapa = [];
+    };
+    EventosZonasComponent.prototype.borrarSensoresMapa = function () {
+        for (var i = 0; i < this.sensoresMapa.length; i++) {
+            this.sensoresMapa[i].setMap(null);
+        }
+        this.sensoresMapa = [];
     };
     //---> Funciones de eventos <---
     EventosZonasComponent.prototype.suscribirseEvento = function (evento) {
@@ -49,7 +65,11 @@ var EventosZonasComponent = (function () {
         var zona = this.zonas.find(function (z) { return z.Latitude == lat && z.Longitude == lon; });
         if (zona) {
             this.eventosService.getEventosZonaByCityZone(localStorage.getItem('ciudad'), zona.ID).then(function (eventos) {
+                console.log("1");
+                console.log(eventos);
                 if (eventos) {
+                    console.log("asdads");
+                    console.log(eventos);
                     for (var e = 0; e < eventos.length; e++) {
                         if (!eventos[e].SendoresAsociados) {
                             eventos[e].SendoresAsociados = [];
@@ -70,8 +90,23 @@ var EventosZonasComponent = (function () {
             _this.inicializo();
         });
     };
+    EventosZonasComponent.prototype.getSensores = function () {
+        var _this = this;
+        this.borrarSensoresMapa();
+        this.SensoresService.getSensoresByCityName(localStorage.getItem('ciudad')).subscribe(function (sensores) {
+            for (var i = 0; i < sensores.length; i++) {
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(sensores[i].Latitude, sensores[i].Longitude),
+                    title: sensores[i].Tipo,
+                    map: _this.map
+                });
+                _this.sensoresMapa.push(marker);
+            }
+        });
+    };
     EventosZonasComponent.prototype.getZonas = function () {
         var _this = this;
+        this.borrarZonasMapa();
         this.ZonasService.getZonasByCityName(localStorage.getItem('ciudad')).then(function (zonas) {
             if (zonas) {
                 _this.zonas = zonas;
@@ -110,7 +145,7 @@ var EventosZonasComponent = (function () {
             moduleId: module.id,
             templateUrl: 'eventosZonas.component.html'
         }), 
-        __metadata('design:paramtypes', [eventos_service_1.EventosService, zonas_service_1.ZonasService])
+        __metadata('design:paramtypes', [eventos_service_1.EventosService, zonas_service_1.ZonasService, sensores_service_1.SensoresService])
     ], EventosZonasComponent);
     return EventosZonasComponent;
 }());
