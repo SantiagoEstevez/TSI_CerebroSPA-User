@@ -91,7 +91,6 @@ var ChatComponent = (function () {
     };
     ChatComponent.prototype.initializePolling = function (agrupacion) {
         var _this = this;
-        this.chats.push("nuevo1");
         IntervalObservable_1.IntervalObservable.create(1000).subscribe(function (n) {
             _this.ChatService.getChats(localStorage.getItem('ciudad'), agrupacion.Nombre).subscribe(function (res) {
                 _this.chats = res;

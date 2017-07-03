@@ -21,7 +21,7 @@ export class ChatComponent implements OnInit {
     oAgrupacion: Agrupacion;
     agrupaciones: Agrupacion[];
     MisAgrupaciones: Agrupacion[];
-    chats: string[];
+    chats: Chat[];
 
     constructor(
         private ChatService: ChatService
@@ -106,7 +106,6 @@ export class ChatComponent implements OnInit {
     }
 
     initializePolling(agrupacion: Agrupacion) {
-        this.chats.push("nuevo1");
         IntervalObservable.create(1000).subscribe(n => {
             this.ChatService.getChats(localStorage.getItem('ciudad'), agrupacion.Nombre).subscribe(res => {
                 this.chats = res;
